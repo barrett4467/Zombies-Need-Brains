@@ -27,15 +27,16 @@ const display = () => {
     )
 }
 
-const levelUp = () => {
+const nextLevel = () => {
     leveledUp = true;
-
-    // num1++;
-    // num2 = 0;
+    for (var i = 0; i < wrongAnswers.length; i++){
+        num1 = wrongAnswers[i].num1;
+        num2 = wrongAnswers[i].num2;
+    }
 }
 
 const replay = () => {
-    leveledUp = true;
+
     console.log(operator);
     console.log(wrongAnswers);
     console.log(correctAnswers);
@@ -75,61 +76,20 @@ const replay = () => {
 
 }
 
-// const replayMissed = () => {
-//     let wrongRound = wrongAnswers;
-//     let problem = {num1, operator, num2};
-//     console.log("wrongRound");
-//     console.log(wrongRound);
-//     console.log("wrongAnswers");
-//     console.log(wrongAnswers);
-//     wrongAnswers = [];
-//     console.log("wrongRound");
-//     console.log(wrongRound);
-//     if (wrongRound.length > 0){
-//         for (let i = 0; i < wrongRound.length; i++){
-//             num1 = wrongRound[i].num1;
-//             operator = wrongRound[i].operator;
-//             num2 = wrongRound[i].num2;
-            
-//             problem = {num1, operator, num2};
-//             console.log(problem);
-//             // correctAnswer === userAnswer ?  console.log("correct") : wrongRound2.push(problem); 
-//             return (
-//                 <>
-//                     <h3 id="num1">{problem.num1}</h3>
-//                     <p id="operation">{problem.operator}</p>
-//                     <h3 id="num2">{problem.num2}</h3>
-//                     <h3>______</h3>
-//                     <form>
-//                         <input type="text" placeholder="Answer" id="answer"></input>
-//                         <button id="submit" onClick={handleSubmit}>Submit</button>
-//                     </form>
-//                     <p id="userAnswer"></p>
-//                     <p id="correctAnswer"></p>
-//                 </>
-//             )
-//         }
-//     } else {
-//         console.log("will be a badge");
-//     }
-
-
-//     // console.log(wrongRound2);
-// }
-
-
 const getNewNumber = () => {
-    if(wrongAnswers.length > 0){
-        for (let i = 0; i < wrongAnswers.length; i++){
-            num1 = wrongAnswers[i].num1;
-            num2 = wrongAnswers[i].num2;
-        }
+    // if(wrongAnswers.length > 0){
+    //     for (let i = 0; i < wrongAnswers.length; i++){
+    //         num1 = wrongAnswers[i].num1;
+    //         num2 = wrongAnswers[i].num2;
+    //     }
+    // } else {
+
+    // }
+    
+    if (operator === "/"){
+        num1 < 5 ? num1++ : replay();
     } else {
-        if (operator === "/"){
-            num1 < 5 ? num1++ : levelUp();
-        } else {
-            num2 < 5 ? num2++ : replay();  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<change back to 10
-        }
+        num2 < 5 ? num2++ : nextLevel();  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<change back to 10
     }
     // num1 = Math.floor(Math.random() * 10);
     //send numbers to page 
@@ -154,14 +114,26 @@ const handleSubmit = (event) => {
 
     //clears the input field
     document.getElementById("answer").value = "";
-    getNewNumber();
-    // leveledUp ? replay() : getNewNumber();
+    // getNewNumber();
+    leveledUp ? nextLevel() : getNewNumber();
     // //generates a new problem 
     // getNewNumber();
 }
 const compare = () => {
     const problem = {num1, operator, num2};
-    correctAnswer === userAnswer ? correctAnswers.push(problem) : wrongAnswers.push(problem);
+    let index = -1;
+    const check = () => {
+        wrongAnswers.push(problem);
+        index = wrongAnswers.indexOf(problem);
+    }
+
+    correctAnswer === userAnswer ?  console.log("this"): check();
+    
+
+    // correctAnswers.slice(index, 1)
+    console.log("index: " + index);
+    console.log(problem);
+    console.log(wrongAnswers);
     
 
 }
