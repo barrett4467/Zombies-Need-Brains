@@ -1,12 +1,12 @@
 import React from "react";
 
-function Spelling () {
+
+function MathGame () {
     return (
         <div>
-            <h1>Spelling</h1>
+            <h1>MathGame</h1>
         </div>
     )
 }
 
-
-export default Spelling;
+export default MathGame;

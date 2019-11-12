@@ -1,18 +1,31 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Math from "./pages/Math/MathGame";
+import NavBar from "./components/Nav";
+import Home from "./pages/Home";
+import Badges from "./pages/Badges";
+import LogIn from "./pages/LogIn";
+import SignUp from "./pages/SignUp";
+import Spelling from "./pages/Spelling";
+import MathGame from "./pages/Math/MathGame";
+import NoMatch from "./pages/NoMatch";
 
 
 function App() {
   return (
-    <>
-      <div style={{textAlign: "center"}}>
-        <h1>Its Loading Correctly</h1>
-        <img src="https://media.giphy.com/media/12dDR6n2Nqto4g/giphy.gif" alt="Walking zombie"></img>
-
-        <Math/>
-      </div>
-    </>
+    <Router>
+      <>
+        <NavBar />
+        <Switch>
+          <Route exact path={"/"} component={Home}/>
+          <Route exact path={"/badges"} component={Badges} />
+          <Route exact path={"/login"} component={LogIn} />
+          <Route exact path={"/signup"} component={SignUp} />
+          <Route exact path={"/spelling"} component={Spelling} />
+          <Route path={"/math"} component={MathGame} />
+          <Route component={NoMatch}/>
+        </Switch>
+      </>
+    </Router>
   );
 }
 
