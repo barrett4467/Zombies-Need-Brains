@@ -5,10 +5,10 @@ let num1 = 0;
 let num2 = 0;
 let wrongAnswers = [];
 
-let operator= "";
+let operator = "";
 
-let userAnswer= "";
-let correctAnswer= "";
+let userAnswer = "";
+let correctAnswer = "";
 let leveledUp = false;
 const display = () => {
     return(
@@ -35,15 +35,43 @@ const levelUp = () => {
 }
 
 const replay = () => {
+    leveledUp = true;
+    console.log(operator);
     console.log(wrongAnswers);
-
-    for (let i = 0; i < wrongAnswers.length; i++){
-        num1 = wrongAnswers[i].num1;
-        num2 = wrongAnswers[i].operator;
-        num2 = wrongAnswers[i].num2;
-        display();
+    console.log(correctAnswers);
+    num1++;
+    num2 = 0; 
+    if (num1 === 2){
+        console.log(wrongAnswers);
+        for (let i = 0; i < wrongAnswers.length; i++){
+            num1 = wrongAnswers[i].num1;
+            num2 = wrongAnswers[i].num2;
+        }
     }
-    console.log("Done");
+    // let i = 0;
+    // if (wrongAnswers.length > 0){
+    //     num1 = wrongAnswers[i].num1;
+    //     num2 = wrongAnswers[i].num2;
+    //     display();
+    // } else {
+    //     const loadMissed = () => {
+    //             console.log("Wrong Answers");
+    //             console.log(wrongAnswers);
+    //             console.log("THIS: " + num1);
+    //             num1 = 1;
+            
+    //     }
+    //     const increaseNum = () => {
+    //         num1 = num1 + 1;
+    //         console.log("Num1: " + num1);
+    //         num2 = 0;
+    //     }
+    //     wrongAnswers.length > 0 ? loadMissed() : increaseNum();
+    //     num1 = 5 ? loadMissed() : increaseNum();
+    // // }
+    // console.log("Done");
+
+    // console.log(leveledUp);
 
 }
 
@@ -91,13 +119,19 @@ const replay = () => {
 
 
 const getNewNumber = () => {
-
-    // num1 = Math.floor(Math.random() * 10);
-    if (operator === "/"){
-        num1 < 5 ? num1++ : levelUp();
+    if(wrongAnswers.length > 0){
+        for (let i = 0; i < wrongAnswers.length; i++){
+            num1 = wrongAnswers[i].num1;
+            num2 = wrongAnswers[i].num2;
+        }
     } else {
-        num2 < 5 ? num2++ : replay();  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<change back to 10
+        if (operator === "/"){
+            num1 < 5 ? num1++ : levelUp();
+        } else {
+            num2 < 5 ? num2++ : replay();  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<change back to 10
+        }
     }
+    // num1 = Math.floor(Math.random() * 10);
     //send numbers to page 
     document.getElementById("num1").innerHTML = num1;
     document.getElementById("num2").innerHTML = num2;
@@ -120,13 +154,15 @@ const handleSubmit = (event) => {
 
     //clears the input field
     document.getElementById("answer").value = "";
-    leveledUp ? console.log(true) : getNewNumber();
+    getNewNumber();
+    // leveledUp ? replay() : getNewNumber();
     // //generates a new problem 
     // getNewNumber();
 }
 const compare = () => {
     const problem = {num1, operator, num2};
     correctAnswer === userAnswer ? correctAnswers.push(problem) : wrongAnswers.push(problem);
+    
 
 }
 const calculateAnswer = () => {
@@ -169,7 +205,6 @@ const DisplayProblem = (props) => {
     const url = props.match.url;
     const urlSplit = url.split("/");
     operator = urlSplit[2];
-
     switch (operator){
         case "addition":
             operator = "+";
@@ -189,7 +224,7 @@ const DisplayProblem = (props) => {
             break;
         }
         return(
-            display()
+           display()
 
         )
 }
