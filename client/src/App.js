@@ -20,7 +20,7 @@ function App() {
           <Route exact path={"/badges"} component={Badges} />
           <Route exact path={"/login"} component={LogIn} />
           <Route exact path={"/signup"} component={SignUp} />
-          <Route exact path={"/spelling"} component={Spelling} />
+          <Route path={"/spelling"} component={Spelling} />
           <Route exact path={"/math"} component={MathGame} />
           <Route component={NoMatch}/>
         </Switch>
