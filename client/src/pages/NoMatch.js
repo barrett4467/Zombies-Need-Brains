@@ -6,7 +6,7 @@ function NoMatch() {
         <>
             <div style={{ textAlign: "center" }}>
                 <h1>404 Not Found</h1>
-                <img src="https://media.giphy.com/media/12dDR6n2Nqto4g/giphy.gif" alt="Walking Zombie"></img>
+                <img src="https://media.giphy.com/media/12dDR6n2Nqto4g/giphy.gif" alt="walking zombie"></img>
             </div>
         </>
     );

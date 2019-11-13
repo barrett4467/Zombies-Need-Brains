@@ -1,28 +1,91 @@
 import React from "react";
 import { BrowserRouter as  Router, Route, Switch, Link } from "react-router-dom";
-import questions from "../../utils/mathQuestions";
+import mathQuestions from "../../utils/mathQuestions";
+import styled from "styled-components";
+import { createBrowserHistory} from "history";
 
+const ProblemWrapper = styled.section`
+    text-align: center;
+    background-color: white;
+    h3: {
+        background-color: white;
+        font-size: 25px;
+        padding: 15px;
+    }
+`
+
+let questions = mathQuestions;
 let num1 = 0;
 let num2 = 0;
+let index = 0;
 let wrongAnswers = [];
+let numWrong = 0;
 
 let operator = "";
 
 let userAnswer = "";
 let correctAnswer = "";
-let leveledUp = false;
 
-//questions.map(question => (
-    // loop through
-//))
+const divisionQuestions = [
+    {
+        num1: 5,
+        num2: 1,
+        guessed: false
+    },
+    {
+        num1: 9,
+        num2: 3,
+        guessed: false
+    },
+    {
+        num1: 8,
+        num2: 2,
+        guessed: false
+    },
+    {
+        num1: 8,
+        num2: 1,
+        guessed: false
+    },
+    {
+        num1: 10,
+        num2: 5,
+        guessed: false
+    },
+    {
+        num1: 9,
+        num2: 1,
+        guessed: false
+    },
+    {
+        num1: 6,
+        num2: 3,
+        guessed: false
+    },
+    {
+        num1: 2,
+        num2: 1,
+        guessed: false
+    },
+    {
+        num1: 2,
+        num2: 2,
+        guessed: false
+    },
+    {
+        num1: 6,
+        num2: 2,
+        guessed: false
+    },
+]
 
 
 const display = () => {
     return(
-        <>
-            <h3 id="num1">{num1}</h3>
+        <ProblemWrapper>
+            <h3 id="num1">{questions[num1].num1}</h3>
             <p id="operation">{operator}</p>
-            <h3 id="num2">{num2}</h3>
+            <h3 id="num2">{questions[num2].num2}</h3>
             <h3>______</h3>
             <form>
                 <input type="text" placeholder="Answer" id="answer"></input>
@@ -30,59 +93,27 @@ const display = () => {
             </form>
             <p id="userAnswer"></p>
             <p id="correctAnswer"></p>
-        </>
+        </ProblemWrapper>
     )
 }
 
 const nextLevel = () => {
-    console.log("hit nextLevel");
-    // console.log(leveledUp);
-    const displayWrong = () => {
-        console.log("hit displayWrong");
-        let index;
-        for (var i = 0; i < wrongAnswers.length; i++){
-            index = i;
-            console.log(wrongAnswers[i]);
-            num1 = wrongAnswers[i].num1;
-            num2 = wrongAnswers[i].num2;
-            console.log("index " + index);
-        }
-    }
-    const reset = () => {
-        num1++;
-        num2 = 0;
-    }
-
-    wrongAnswers.length > 0 ? displayWrong(): reset();
-
-}
-
-const replay = () => {
-    console.log("hit replay");
-
-    num1++;
-    num2 = 0; 
-    if (num1 === 2){
-        // console.log(wrongAnswers);
-        for (let i = 0; i < wrongAnswers.length; i++){
-            num1 = wrongAnswers[i].num1;
-            num2 = wrongAnswers[i].num2;
-        }
-    }
+    alert(`You win: ${numWrong} questions were guessed incorrectly`);
 
 }
 
 const getNewNumber = () => {
-    console.log("hit getNewNumber");
-    if (operator === "/"){
-        num1 < 5 ? num1++ : replay();
-    } else {
-        num2 < 5 ? num2++ : nextLevel();  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<change back to 10
-    }
 
-    //send numbers to page 
-    document.getElementById("num1").innerHTML = num1;
-    document.getElementById("num2").innerHTML = num2;
+    if (index < questions.length - 1){
+        //gets next question
+        index++
+        //send numbers to page 
+        document.getElementById("num1").innerHTML = questions[index].num1;
+        document.getElementById("num2").innerHTML = questions[index].num2;
+    } else {
+        //triggers end game
+        nextLevel();
+    }
 
 }
 
@@ -102,34 +133,24 @@ const handleSubmit = (event) => {
 
     //clears the input field
     document.getElementById("answer").value = "";
-    console.log("Leveled up? " + leveledUp);
     //generates a new problem 
-
-    num1 === 2 ? nextLevel() : getNewNumber();
-    // getNewNumber();
+    console.log(numWrong);
+    if (numWrong === 3){
+        alert("You lose!");
+    }else {
+        getNewNumber();
+    }
 }
 const compare = () => {
-    const problem = {num1, operator, num2, guessedCorrectly: false};
-    // let index;
     const wrong = () => {
-        problem.guessedCorrectly = false;
-        wrongAnswers.push(problem);
-        for (let i = 0; i < wrongAnswers.length; i++ ){
-            if(problem === wrongAnswers[i]){
-
-            }
-
-        }
+        numWrong++;
     }
     const right = () => {
-        problem.guessedCorrectly = true;
+        questions[index].guessed = true;
     }
         correctAnswer === userAnswer ?  right(): wrong();
     }
-    
 
-    // correctAnswers.slice(index, 1)
-    // console.log(problem);
     console.log(wrongAnswers);
     
 
@@ -137,19 +158,19 @@ const compare = () => {
 const calculateAnswer = () => {
     switch (operator) {
         case "+":
-            correctAnswer = num1 + num2;
+            correctAnswer = questions[index].num1 + questions[index].num2;
             compare();
             break
         case "-":
-            correctAnswer = num1 - num2;
+            correctAnswer = questions[index].num1 - questions[index].num2;
             compare();
             break
         case "x":
-            correctAnswer = num1 * num2;
+            correctAnswer = questions[index].num1 * questions[index].num2;
             compare();
             break
         case "/":
-            correctAnswer = num1 / num2;
+            correctAnswer = questions[index].num1 / questions[index].num2;
             compare();
             break
         default:
@@ -169,7 +190,7 @@ const MathHome = () => {
     )
 }
 
-//
+
 const DisplayProblem = (props) => {
     
     const url = props.match.url;
@@ -187,8 +208,7 @@ const DisplayProblem = (props) => {
             break
         case "division":
             operator = "/";
-            num1 = 1;
-            num2 = 1;
+            questions = divisionQuestions;
             break
         default: 
             break;

@@ -1,26 +1,52 @@
 const questions = [
     {
-        num1: 0,
-        num2: 1,
-        answer: 1,
+        num1: Math.floor(Math.random() * 10),
+        num2: Math.floor(Math.random() * 10),
         guessed: false
     },
     {
-        num1: 0,
-        num2: 2,
-        answer: 2,
+        num1: Math.floor(Math.random() * 10),
+        num2: Math.floor(Math.random() * 10),
         guessed: false
     },
     {
-        num1: 0,
-        num2: 3,
-        answer: 3,
+        num1: Math.floor(Math.random() * 10),
+        num2: Math.floor(Math.random() * 10),
         guessed: false
     },
     {
-        num1: 0,
-        num2: 4,
-        answer: 4,
+        num1: Math.floor(Math.random() * 10),
+        num2: Math.floor(Math.random() * 10),
+        guessed: false
+    },
+    {
+        num1: Math.floor(Math.random() * 10),
+        num2: Math.floor(Math.random() * 10),
+        guessed: false
+    },
+    {
+        num1: Math.floor(Math.random() * 10),
+        num2: Math.floor(Math.random() * 10),
+        guessed: false
+    },
+    {
+        num1: Math.floor(Math.random() * 10),
+        num2: Math.floor(Math.random() * 10),
+        guessed: false
+    },
+    {
+        num1: Math.floor(Math.random() * 10),
+        num2: Math.floor(Math.random() * 10),
+        guessed: false
+    },
+    {
+        num1: Math.floor(Math.random() * 10),
+        num2: Math.floor(Math.random() * 10),
+        guessed: false
+    },
+    {
+        num1: Math.floor(Math.random() * 10),
+        num2: Math.floor(Math.random() * 10),
         guessed: false
     }
 ]
