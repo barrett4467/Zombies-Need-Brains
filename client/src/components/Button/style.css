@@ -1,0 +1,22 @@
+button {
+    margin: 1%;
+    padding: 20px;
+    font-size: 20px;
+}
+
+#mathButton {
+    background-image: url("https://media.istockphoto.com/vectors/colorful-mathematics-or-math-education-background-texture-in-vector-vector-id940178214?k=6&m=940178214&s=170667a&w=0&h=u8dsy69JQIy9nfNQHbFIz52KUzEPP380Vxx7m3TzujA=");
+    background-size: 65%;
+    color: ivory;
+    width: 25%;
+    height: max-content;
+}
+
+#spellingButton {
+    background-image: url("https://www.thoughtco.com/thmb/CWi-VMz_aJLDI-A2Tf0ozoTxmHo=/768x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-1082876494-5c36ba99c9e77c0001e283c4.jpg");
+    background-size: 75%;
+    color: ivory;
+    width: 25%;
+    height: max-content;
+}
+
