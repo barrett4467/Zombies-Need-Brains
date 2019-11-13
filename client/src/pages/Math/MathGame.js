@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as  Router, Route, Switch, Link } from "react-router-dom";
+import questions from "../../utils/mathQuestions";
 
 let num1 = 0;
 let num2 = 0;
@@ -10,6 +11,12 @@ let operator = "";
 let userAnswer = "";
 let correctAnswer = "";
 let leveledUp = false;
+
+//questions.map(question => (
+    // loop through
+//))
+
+
 const display = () => {
     return(
         <>
@@ -28,76 +35,57 @@ const display = () => {
 }
 
 const nextLevel = () => {
-    leveledUp = true;
-    for (var i = 0; i < wrongAnswers.length; i++){
-        num1 = wrongAnswers[i].num1;
-        num2 = wrongAnswers[i].num2;
+    console.log("hit nextLevel");
+    // console.log(leveledUp);
+    const displayWrong = () => {
+        console.log("hit displayWrong");
+        let index;
+        for (var i = 0; i < wrongAnswers.length; i++){
+            index = i;
+            console.log(wrongAnswers[i]);
+            num1 = wrongAnswers[i].num1;
+            num2 = wrongAnswers[i].num2;
+            console.log("index " + index);
+        }
     }
+    const reset = () => {
+        num1++;
+        num2 = 0;
+    }
+
+    wrongAnswers.length > 0 ? displayWrong(): reset();
+
 }
 
 const replay = () => {
+    console.log("hit replay");
 
-    console.log(operator);
-    console.log(wrongAnswers);
-    console.log(correctAnswers);
     num1++;
     num2 = 0; 
     if (num1 === 2){
-        console.log(wrongAnswers);
+        // console.log(wrongAnswers);
         for (let i = 0; i < wrongAnswers.length; i++){
             num1 = wrongAnswers[i].num1;
             num2 = wrongAnswers[i].num2;
         }
     }
-    // let i = 0;
-    // if (wrongAnswers.length > 0){
-    //     num1 = wrongAnswers[i].num1;
-    //     num2 = wrongAnswers[i].num2;
-    //     display();
-    // } else {
-    //     const loadMissed = () => {
-    //             console.log("Wrong Answers");
-    //             console.log(wrongAnswers);
-    //             console.log("THIS: " + num1);
-    //             num1 = 1;
-            
-    //     }
-    //     const increaseNum = () => {
-    //         num1 = num1 + 1;
-    //         console.log("Num1: " + num1);
-    //         num2 = 0;
-    //     }
-    //     wrongAnswers.length > 0 ? loadMissed() : increaseNum();
-    //     num1 = 5 ? loadMissed() : increaseNum();
-    // // }
-    // console.log("Done");
-
-    // console.log(leveledUp);
 
 }
 
 const getNewNumber = () => {
-    // if(wrongAnswers.length > 0){
-    //     for (let i = 0; i < wrongAnswers.length; i++){
-    //         num1 = wrongAnswers[i].num1;
-    //         num2 = wrongAnswers[i].num2;
-    //     }
-    // } else {
-
-    // }
-    
+    console.log("hit getNewNumber");
     if (operator === "/"){
         num1 < 5 ? num1++ : replay();
     } else {
         num2 < 5 ? num2++ : nextLevel();  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<change back to 10
     }
-    // num1 = Math.floor(Math.random() * 10);
+
     //send numbers to page 
     document.getElementById("num1").innerHTML = num1;
     document.getElementById("num2").innerHTML = num2;
 
 }
-let correctAnswers = [];
+
 //on submit of answer
 const handleSubmit = (event) => {
     //prevent refresh
@@ -114,29 +102,38 @@ const handleSubmit = (event) => {
 
     //clears the input field
     document.getElementById("answer").value = "";
-    // getNewNumber();
-    leveledUp ? nextLevel() : getNewNumber();
-    // //generates a new problem 
+    console.log("Leveled up? " + leveledUp);
+    //generates a new problem 
+
+    num1 === 2 ? nextLevel() : getNewNumber();
     // getNewNumber();
 }
 const compare = () => {
-    const problem = {num1, operator, num2};
-    let index = -1;
-    const check = () => {
+    const problem = {num1, operator, num2, guessedCorrectly: false};
+    // let index;
+    const wrong = () => {
+        problem.guessedCorrectly = false;
         wrongAnswers.push(problem);
-        index = wrongAnswers.indexOf(problem);
-    }
+        for (let i = 0; i < wrongAnswers.length; i++ ){
+            if(problem === wrongAnswers[i]){
 
-    correctAnswer === userAnswer ?  console.log("this"): check();
+            }
+
+        }
+    }
+    const right = () => {
+        problem.guessedCorrectly = true;
+    }
+        correctAnswer === userAnswer ?  right(): wrong();
+    }
     
 
     // correctAnswers.slice(index, 1)
-    console.log("index: " + index);
-    console.log(problem);
+    // console.log(problem);
     console.log(wrongAnswers);
     
 
-}
+
 const calculateAnswer = () => {
     switch (operator) {
         case "+":
@@ -174,6 +171,7 @@ const MathHome = () => {
 
 //
 const DisplayProblem = (props) => {
+    
     const url = props.match.url;
     const urlSplit = url.split("/");
     operator = urlSplit[2];
