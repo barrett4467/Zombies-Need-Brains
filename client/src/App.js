@@ -6,7 +6,7 @@ import Badges from "./pages/Badges";
 import LogIn from "./pages/LogIn";
 import SignUp from "./pages/SignUp";
 import Spelling from "./pages/Spelling";
-import MathGame from "./pages/MathGame";
+import MathGame from "./pages/Math/MathGame";
 import NoMatch from "./pages/NoMatch";
 import FirstPage from "./pages/FirstPage"
 
@@ -23,7 +23,7 @@ function App() {
           <Route exact path={"/login"} component={LogIn} />
           <Route exact path={"/signup"} component={SignUp} />
           <Route exact path={"/spelling"} component={Spelling} />
-          <Route exact path={"/math"} component={MathGame} />
+          <Route path={"/math"} component={MathGame} />
           <Route component={NoMatch}/>
         </Switch>
       </>
