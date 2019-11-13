@@ -16,6 +16,12 @@ const questions = [
         num2: 3,
         answer: 3,
         guessed: false
+    },
+    {
+        num1: 0,
+        num2: 4,
+        answer: 4,
+        guessed: false
     }
 ]
 
