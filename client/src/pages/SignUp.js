@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Form, FormGroup, Label, Input, Button, FormFeedback, FormText, Container } from "reactstrap"
-
+import API from "../utils/API";
 function SignUP() {
 
     const [newUser, setNewUser] = useState({
@@ -33,7 +33,15 @@ function SignUP() {
 
     const handleFormSubmit = event => {
         event.preventDefault();
-        alert("Trying to create account!")
+        if(email && password && userName){
+            API.createUser({
+                email,
+                username: userName,
+                password
+            })
+                .then(res => window.location.replace("/home"))
+                .catch(err => console.log(err));
+        }
     }
 
     return (
@@ -69,7 +77,7 @@ function SignUP() {
                     <Input 
                         type="password" 
                         name="user" 
-                        id="userName" 
+                        id="password" 
                         value={password}
                         onChange={handleInputChangeP}
                     />

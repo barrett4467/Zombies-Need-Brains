@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import { Form, FormGroup, Label, Input, Button, FormFeedback, Container } from "reactstrap"
+import API from "../utils/API";
 
 const LogIn = () => {
     const [user, setUser] = useState({
         userName: "",
-        password: ""
+        password: "", 
+        isValid: true
     });
 
-    const { userName, password } = user
+    const { userName, password, isValid } = user
 
     const handleInputChangeP = event => {
         setUser({
@@ -20,11 +22,29 @@ const LogIn = () => {
           ...user,
           userName: event.target.value
         })
-    }
-
+    } 
+    
     const handleFormSubmit = event => {
         event.preventDefault();
-        alert("Trying to log in!")
+        if(userName && password){
+            console.log(userName)
+            API.findUser({
+                username: userName
+            })
+                .then( res => {
+                    if (res.data.password === password ){
+                        window.location.replace("/home");
+                    } else {
+                        console.log(isValid);
+                        setUser({
+                            ...user,
+                            password: "",
+                            isValid: false
+                        });
+                    }
+                })
+                .catch(err => console.log(err));            
+        }
     }
 
 
@@ -46,13 +66,25 @@ const LogIn = () => {
                 </FormGroup>
                 <FormGroup>
                     <Label for="password">Password </Label>
-                    <Input 
+                    {isValid === false ? 
+                    (<Input 
                         type="password" 
-                        name="user" 
-                        id="userName" 
+                        name="password" 
+                        id="password" 
                         value={password}
-                        onChange={handleInputChangeP}
-                        />
+                        onChange={handleInputChangeP} 
+                        invalid                       
+                        />)
+                        :
+                        (<Input 
+                        type="password" 
+                        name="password" 
+                        id="password" 
+                        value={password}
+                        onChange={handleInputChangeP} 
+                                               
+                        />)}
+
                     <FormFeedback style={{color: "red"}}>Please enter your valid password</FormFeedback>
                 </FormGroup>
                 <Button
