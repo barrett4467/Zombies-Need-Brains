@@ -39,7 +39,7 @@ function SignUP() {
                 username: userName,
                 password
             })
-                .then(res => window.location.replace("/home"))
+                .then(res => console.log(res))
                 .catch(err => console.log(err));
         }
     }

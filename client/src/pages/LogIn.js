@@ -6,10 +6,11 @@ const LogIn = () => {
     const [user, setUser] = useState({
         userName: "",
         password: "", 
-        isValid: true
+        isValid: true,
+        userExist: true
     });
 
-    const { userName, password, isValid } = user
+    const { userName, password, isValid, userExist } = user
 
     const handleInputChangeP = event => {
         setUser({
@@ -35,17 +36,23 @@ const LogIn = () => {
                     if (res.data.password === password ){
                         window.location.replace("/home");
                     } else {
-                        console.log(isValid);
                         setUser({
                             ...user,
+                            userExist: true,
                             password: "",
                             isValid: false
                         });
                     }
                 })
-                .catch(err => console.log(err));            
-        }
-    }
+                .catch(err => {
+                    console.log(err);
+                    setUser({
+                        ...user,
+                        userExist: false
+                    });                    
+                });
+        };
+    };
 
 
 
@@ -55,6 +62,7 @@ const LogIn = () => {
                 <h1>Log In!</h1>
                 <FormGroup>
                     <Label for="userName">User Name </Label>
+                    {userExist ? 
                     <Input 
                         type="userName" 
                         name="user" 
@@ -63,6 +71,18 @@ const LogIn = () => {
                         value={userName}
                         onChange= {handleInputChangeU} 
                         />
+                        :
+                        <Input 
+                        type="userName" 
+                        name="user" 
+                        id="userName" 
+                        placeholder="User Name Here!" 
+                        value={userName}
+                        onChange= {handleInputChangeU}
+                        invalid 
+                        />
+                }
+                    <FormFeedback style={{color: "red"}}>User Name Does Not Exist</FormFeedback>
                 </FormGroup>
                 <FormGroup>
                     <Label for="password">Password </Label>
