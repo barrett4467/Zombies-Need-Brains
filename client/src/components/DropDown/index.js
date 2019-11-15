@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
-const Example = (props) => {
+const NavDrop = (props) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const toggle = () => setDropdownOpen(prevState => !prevState);
@@ -20,27 +20,4 @@ const Example = (props) => {
 }
 
 
-
-// const Example = (props) => {
-//     const [dropdownOpen, setOpen] = useState(false);
-
-//     const toggle = () => setOpen(!dropdownOpen);
-
-//     useEffect(() => {
-//         setOpen(false);
-//       },[]);
-
-
-//     return (
-//         <ButtonDropdown isOpen={dropdownOpen} toggle={toggle}>
-//             <DropdownToggle>
-//                 Button Dropdown
-//         </DropdownToggle>
-//             <DropdownMenu>
-//                 <DropdownItem>{props.children}</DropdownItem>
-//             </DropdownMenu>
-//         </ButtonDropdown>
-//     );
-// }
-
-export default Example;
+export default NavDrop;

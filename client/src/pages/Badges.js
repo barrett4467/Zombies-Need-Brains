@@ -1,5 +1,4 @@
 import React from "react";
-import Example from "../components/DropDown";
 
 function Badges () {
     return (

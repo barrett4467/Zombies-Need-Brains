@@ -1,7 +1,7 @@
 import React from "react";
 import "./style.css";
 import { Link } from "react-router-dom";
-import Example from "../DropDown";
+import NavDrop from "../DropDown";
 
 function NavBar() {
     return (
@@ -9,7 +9,7 @@ function NavBar() {
             <nav className="navbar">
                 <h1><Link to="/home">Zombies Need Brains</Link></h1>
                 <ul>
-                    <Example>
+                    <NavDrop>
                         <li>
                             <Link to="/math">Math</Link>
                         </li>
@@ -19,7 +19,7 @@ function NavBar() {
                         <li>
                             <Link to="/badges">Badges</Link>
                         </li>              
-                    </Example>
+                    </NavDrop>
                 </ul>
             </nav>
         </>
