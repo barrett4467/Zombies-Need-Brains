@@ -11,7 +11,8 @@
     "mongoose": "^5.7.8",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
-    "reactstrap": "^8.1.1"
+    "reactstrap": "^8.1.1",
+    "styled-components": "^4.4.1"
   },
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
