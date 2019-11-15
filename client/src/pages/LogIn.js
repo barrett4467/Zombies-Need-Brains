@@ -33,6 +33,7 @@ const LogIn = () => {
                 username: userName
             })
                 .then( res => {
+                    console.log(res)
                     if (res.data.password === password ){
                         window.location.replace("/home");
                     } else {
@@ -48,7 +49,8 @@ const LogIn = () => {
                     console.log(err);
                     setUser({
                         ...user,
-                        userExist: false
+                        userExist: false,
+                        isValid: true
                     });                    
                 });
         };
