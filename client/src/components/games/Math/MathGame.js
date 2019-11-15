@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { BrowserRouter as  Router, Route, Switch, Link } from "react-router-dom";
-import mathQuestions from "../../utils/mathQuestions";
+import mathQuestions from "../../../utils/mathQuestions";
 import styled from "styled-components";
-import { Button, Modal, ModalBody, ModalFooter } from 'reactstrap';
-
 
 
 

@@ -1,5 +1,9 @@
 import React, { useRef, useEffect } from "react";
 import { TimelineMax } from "gsap/all";
+import Buttons from "../Button/index";
+
+
+//need start stop so that animation will not continue on other pages
 
 const ZombieComponent = () => {
     //this is the movement
@@ -11,16 +15,18 @@ const ZombieComponent = () => {
     let zombieRef = useRef(null);
     let paragraphRef = useRef(null);
     let secondParagraphRef = useRef(null);
+    let buttonRef = useRef(null);
+    let button2Ref = useRef(null);
+    let playStopRef = useRef(null);
     
 
     //pulls and starts a new greensock animation tl 
-    const tl = new TimelineMax({ defaults: {duration: 0.25}, paused: false });
+    const tl = new TimelineMax({ defaults: {duration: 0.25}, paused: true });
     //necessary for react to allow animation
     const animate = (j) => {
         useEffect(() => {
             tl.set(zombieRef, {attr:{src: "images/"+ j +".png"}});
             tl.to(zombieRef, {x: x, onComplete: () => x + 5} );
-
 
         })
     }
@@ -49,6 +55,8 @@ const ZombieComponent = () => {
                 document.getElementById("story").innerHTML = `<p ref=${element=>{secondParagraphRef = element}}>Test your skills with math and letter, in hopes of gaining our zombie’s brains back.  
                 </p>`
             }});
+            tl.fromTo(playStopRef, 5, {opacity: 100}, {opacity: 0});
+            tl.fromTo(buttonRef, 5, {opacity: 0}, {opacity: 100});
             
         })
     }
@@ -69,13 +77,13 @@ const ZombieComponent = () => {
         loop();
     }
 
-    // const handleStart = () => {
-    //     tl.play();
-    // };
-    // //stops the animation
-    // const handleStop = () => {
-    //     tl.pause();
-    // }
+    const handleStart = () => {
+        tl.play();
+    };
+    //stops the animation
+    const handleStop = () => {
+        tl.pause();
+    }
 
     return (
         <>
@@ -86,7 +94,26 @@ const ZombieComponent = () => {
                 <p ref={element => {paragraphRef = element}}></p>
                 <p ref={element=>{secondParagraphRef = element}}></p>
 
+
             </div> 
+            <div ref={element=>{playStopRef = element}}>
+                <button onClick={handleStart}>Play</button>
+                <button onClick={handleStop}>Stop</button>
+            </div>
+            <div className="buttonHolder" style={{textAlign: "center"}} ref={element=>{buttonRef = element}}>
+                <Buttons
+                id="mathButton"
+                destination= "/math"
+                content= "Math!"
+                >
+                </Buttons>
+                <Buttons
+                id="spellingButton"
+                destination="/spelling"
+                content= "Spelling!"
+                >
+                </Buttons>
+            </div>
             {/* <div>
                 <button id="play" onClick={handleStart}>Play</button>
                 <button id="stop" onClick={handleStop}>Stop</button>

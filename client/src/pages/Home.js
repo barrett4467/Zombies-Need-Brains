@@ -7,7 +7,7 @@ function Home () {
         <>   <div style={{display:"flex", justifyContent:"center"}}>
                 <Header></Header>        
             </div>     
-            <div className="buttonHolder" style={{textAlign: "center"}}>
+            {/* <div className="buttonHolder" style={{textAlign: "center"}}>
                 <Buttons
                 id="mathButton"
                 destination= "/math"
@@ -20,7 +20,7 @@ function Home () {
                 content= "Spelling!"
                 >
                 </Buttons>
-            </div>
+            </div> */}
         </>
     )
 }

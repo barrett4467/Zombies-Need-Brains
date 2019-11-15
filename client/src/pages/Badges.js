@@ -1,5 +1,4 @@
 import React, { useRef } from "react";
-import Example from "../components/DropDown";
 import Chart from "../components/Chart";
 
 
