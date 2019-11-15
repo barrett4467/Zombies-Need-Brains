@@ -1,6 +1,9 @@
 import React, { useRef, useEffect } from "react";
 import { TimelineMax } from "gsap/all";
 import Buttons from "../Button/index";
+import CSSPlugin from 'gsap/CSSPlugin';
+
+const C = CSSPlugin; 
 
 
 //need start stop so that animation will not continue on other pages
