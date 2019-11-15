@@ -46,10 +46,11 @@ const GameWrapper2 = (props) => {
         x: 0,        
         question:QAData[1].game1.q1,
         answer: QAData[1].game1.a1,
+        image: QAData[1].game1.img1,
         passed: false,
 
     })
-    const { guess, passed, score, answer, question, lives, round, x, qX, level } = data;
+    const {guess, passed, score, answer, question, lives, round, x, image, level } = data;
 
     const EndGame= ()=>{
         if(passed){
@@ -138,6 +139,7 @@ const GameWrapper2 = (props) => {
                 />
                 <QuestionBar
                     question={question[x]}
+                    image={image[x]}
                 />
                 <h3>Fill In The Blank!</h3>
                 <p>Fill In The Missing Letters!</p>

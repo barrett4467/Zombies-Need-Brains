@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Form, FormGroup, Label, Input, } from "reactstrap"
 
-
-const GameWrapper = (props) => {
+const QuestionBar = (props) => {
 
     return (
         <div>
-            <div className="questionBox">
-                <p>Image</p>
+            <div className="questionBox">                
                 <h2>{props.question}</h2>
-                 <p>{props.x}</p>
+                <img src={`${process.env.PUBLIC_URL}/${props.image}`} />
+                {/* <img src={`${process.env.PUBLIC_URL}/icons/${props.icon}.png`} alt={props.description} /> */}
             </div>            
         </div>
     )
 }
-export default GameWrapper
+export default QuestionBar

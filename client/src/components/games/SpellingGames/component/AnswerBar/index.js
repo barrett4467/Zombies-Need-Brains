@@ -6,14 +6,15 @@ const AnswerBar = (props) => {
 
     return (
         <div>
-            <Form>
-                <FormGroup>
+            <Form onSubmit={props.handleFormSubmit}>
+                <FormGroup >
                     <Input 
                     name="text"
                     id="exampleText"
-                    onChange={props.handleInputChange} />
+                    onChange={props.handleInputChange}
+                     />
                 </FormGroup>
-                <Button onClick={props.handleFormSubmit}>Submit</Button>
+                <Button type="submit">Submit</Button>
             </Form>
         </div>
     )

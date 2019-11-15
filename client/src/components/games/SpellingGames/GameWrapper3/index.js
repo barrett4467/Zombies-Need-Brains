@@ -47,11 +47,10 @@ const GameWrapper = (props) => {
         question: QAData[2].game1.q1,
         answer: QAData[2].game1.a1,
         passed: false,
-
-        toggle: false
+        image: QAData[2].game1.img1
 
     })
-    const { guess, passed, score, answer, question, lives, round, x, } = data;
+    const { guess, passed, score, answer, question, lives, round, x,image, } = data;
 
     const EndGame = () => {
         if (passed) {
@@ -139,6 +138,7 @@ const GameWrapper = (props) => {
                 />
                 <QuestionBar
                     question={question[x]}
+                    image={image[x]}
                 />
                 <h3>Plural Words!</h3>
                 <p>A plural words indicates that there is more than one of that word</p>
