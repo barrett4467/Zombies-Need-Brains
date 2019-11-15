@@ -10,6 +10,7 @@
     "express": "^4.17.1",
     "if-env": "^1.0.4",
     "mongoose": "^5.7.8",
+    "gsap": "^3.0.1",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "reactstrap": "^8.1.1",
