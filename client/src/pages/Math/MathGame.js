@@ -178,17 +178,6 @@ const display = () => {
                 <input type="text" placeholder="Answer" id="answer"></input>
                 <button id="submit" onClick={handleSubmit}>Submit</button>
             </form>
-            <div>
-                <Button color="danger" onClick={toggle}></Button>
-                <Modal isOpen={setModal} toggle={toggle}>
-                    <ModalBody>
-                    You Win!!
-                    </ModalBody>
-                    <ModalFooter>
-                    <Button color="primary" onClick={toggle}>Okay!</Button>{' '}
-                    </ModalFooter>
-                </Modal>
-                </div>
             <Answers>
                 <p id="userAnswer"></p>
                 <p id="correctAnswer"></p>
@@ -197,16 +186,10 @@ const display = () => {
     )
 }
 
-let setModal = false;
-const toggle = () => setModal = true;
-console.log(setModal);
 const nextLevel = () => {
-    // alert(`You win: ${numWrong} questions were guessed incorrectly`);
-    console.log(Modal);
-    setModal= true;
-    console.log(setModal);
+    alert(`You win: ${numWrong} questions were guessed incorrectly`);
+
 }
-setTimeout(nextLevel, 2000);
 
 const getNewNumber = () => {
 

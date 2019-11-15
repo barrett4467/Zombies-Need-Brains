@@ -7,8 +7,11 @@ const ZombieComponent = () => {
     let count = 0;
     let image = 1;
     //literally just grabs the zombie image
+    let welcomeRef = useRef(null);
     let zombieRef = useRef(null);
     let paragraphRef = useRef(null);
+    let secondParagraphRef = useRef(null);
+    
 
     //pulls and starts a new greensock animation tl 
     const tl = new TimelineMax({ defaults: {duration: 0.25}, paused: false });
@@ -17,10 +20,39 @@ const ZombieComponent = () => {
         useEffect(() => {
             tl.set(zombieRef, {attr:{src: "images/"+ j +".png"}});
             tl.to(zombieRef, {x: x, onComplete: () => x + 5} );
-            tl.fromTo(paragraphRef, 2, {opacity: 0}, {opacity: 100} );
+
 
         })
     }
+    const changeText = () => {
+        useEffect(() => {
+            tl.to(welcomeRef, 3, {opacity: 0, onComplete: () => {
+                document.getElementById("story").innerHTML = `<p ref=${element=>{paragraphRef = element}}>Once upon a time, zombies had brains like you and me.</p>`
+            }});
+            tl.fromTo(paragraphRef, 4, {opacity: 0}, {opacity: 100, onComplete: () => {
+                document.getElementById("story").innerHTML = `<p ref=${element=>{secondParagraphRef = element}}>But somewhere along the way, things started to change.</p>`
+            }});
+            tl.fromTo(secondParagraphRef, 4, {opacity: 0}, {opacity: 100, onComplete: () => {
+                document.getElementById("story").innerHTML = `<p ref=${element=>{secondParagraphRef = element}}>There were rumors of a corporation driven by greed who poisoned the air where the zombies,
+                who weren’t yet zombies, liked to feed.
+                </p>`
+            }});
+            tl.fromTo(secondParagraphRef, 4, {opacity: 0}, {opacity: 100, onComplete: () => {
+                document.getElementById("story").innerHTML = `<p ref=${element=>{secondParagraphRef = element}}>And slowly but surely the zombies, who weren’t quite zombies, lost their brains.
+                </p>`
+            }});
+            tl.fromTo(secondParagraphRef, 4, {opacity: 0}, {opacity: 100, onComplete: () => {
+                document.getElementById("story").innerHTML = `<p ref=${element=>{secondParagraphRef = element}}>It’s now up to you, dear fellow, to turn them back. 
+                </p>`
+            }});
+            tl.fromTo(secondParagraphRef, 4, {opacity: 0}, {opacity: 100, onComplete: () => {
+                document.getElementById("story").innerHTML = `<p ref=${element=>{secondParagraphRef = element}}>Test your skills with math and letter, in hopes of gaining our zombie’s brains back.  
+                </p>`
+            }});
+            
+        })
+    }
+    changeText();
     const callAnimate = () => {
         let i = 0;
         const loop = () => {
@@ -36,7 +68,6 @@ const ZombieComponent = () => {
         i = 0;
         loop();
     }
-    callAnimate();
 
     // const handleStart = () => {
     //     tl.play();
@@ -48,9 +79,13 @@ const ZombieComponent = () => {
 
     return (
         <>
-            <div className="wrapper">
-                <p ref={element => {paragraphRef = element}}>Oh No! The Zombies have lost their brains! Its up to you to help them!</p>
-                <img id="one" src={`${process.env.PUBLIC_URL}/images/${image}.png`} alt="zombie" ref={element => {zombieRef = element}}/>
+            <div className="wrapper" id="story">
+                <h1 ref={element => {welcomeRef = element}}>
+                    Welcome!
+                </h1>
+                <p ref={element => {paragraphRef = element}}></p>
+                <p ref={element=>{secondParagraphRef = element}}></p>
+
             </div> 
             {/* <div>
                 <button id="play" onClick={handleStart}>Play</button>
