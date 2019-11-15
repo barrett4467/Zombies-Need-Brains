@@ -1,11 +1,11 @@
 import React from "react";
-import Buttons from "../components/Button"
-import Header from "../components/Header"
+import Buttons from "../components/Button";
+import Header from "../components/Header";
 
 function Home () {
     return (
         <>   <div style={{display:"flex", justifyContent:"center"}}>
-                <Header></Header>            
+                <Header></Header>        
             </div>     
             <div className="buttonHolder" style={{textAlign: "center"}}>
                 <Buttons
