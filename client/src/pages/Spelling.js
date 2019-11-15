@@ -6,16 +6,7 @@ import GameWrapper2 from "../components/games/SpellingGames/GameWrapper2"
 import GameWrapper3 from "../components/games/SpellingGames/GameWrapper3"
 
 
-const Spelling = () => {
-
-    // const hideButtons =()=> {
-    //     var bb = document.getElementById("buttonBar");
-    //     if (bb.style.display === "none") {
-    //       bb.style.display = "block";
-    //     } else {
-    //       bb.style.display = "none";
-    //     }
-    //   }
+const Spelling = () => {  
 
     return (
         <>

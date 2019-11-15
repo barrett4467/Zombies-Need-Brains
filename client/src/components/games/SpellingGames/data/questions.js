@@ -11,6 +11,7 @@ const QAData = [{
     game1: {
         q1: ["P__ce", "__ight", "Pollu____", "Curt___", "____sure", "Mea____", "Dis___e", "Cow___", "S____ule", "in_____ual"],
         a1: ["ie", "Kn", "tion", "ain", "Trea", "sure", "eas", "ward", "ched", "divid"],
+        img1:["../../../"]
     }
 },
 {

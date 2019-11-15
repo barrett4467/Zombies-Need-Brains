@@ -6,8 +6,8 @@ import AnswerBar from "../component/AnswerBar"
 import WinnerWindow from "../component/WinnerWindow"
 import LoserWindow from "../component/LoserWindow"
 import QAData from "../data/questions"
-let visible = true
 
+let visible = true
 let display = () => {
     if (visible) {
         display = "block"
@@ -28,6 +28,7 @@ let display1 = () => {
 }
 const GameBox = styled.section`
 display:${display};
+background:white
 `
 const Results = styled.section`
 display:${display1};
@@ -49,62 +50,17 @@ const GameWrapper = (props) => {
     })
     const { guess, qA, score, answer, question, lives, round, x, passed,  } = data;
 
-    const handleInputChange = event => {
-        setData({
-            ...data,
-            guess: event.target.value
-        })
-    }
-
-   
-
-    const handleFormSubmit = event => {
-        event.preventDefault()
-        alert(guess)
-
-        if (guess.toLowerCase().trim() === answer[x].toLowerCase() && round === 10) {
-            //   winner
-            visible=false
-        } else if (guess.toLowerCase().trim() === answer[x].toLowerCase()) {
-            let currentScore = score
-            currentScore++
-            let currentRound = round
-            currentRound++
-            let currentX = x
-            currentX++
-            setData({
-                ...data,
-                score: currentScore,
-                round: currentRound,
-                x: currentX
-            })
-            alert("correct")
-        } else {
-            alert("Wrong" + answer[x])
-            let currentRound = round
-            currentRound++
-            let currentLives = lives
-            currentLives--
-            let currentX = x
-            currentX++
-            setData({
-                ...data,
-                lives: currentLives,
-                round: currentRound,
-                x: currentX,
-                toggle: true,
-            })
-        } if (lives === 1) {
-            alert("You lose")
-            visible=false
-           
-
-
-        }
-
+    const EndGame= ()=>{
+        if(passed){
+            return<WinnerWindow
+            score={score}/>
+        }else {return <LoserWindow
+            playAgain={playAgain}
+        />}
     }
     const playAgain = event => {
-        event.preventDefault()
+        event.preventDefault()     
+        visible=true
         let currentRound = round
         currentRound = 1
         let currentLives = lives
@@ -121,7 +77,57 @@ const GameWrapper = (props) => {
             score: currentScore,
         })
     }
+    const handleInputChange = event => {
+        setData({
+            ...data,
+            guess: event.target.value
+        })
+    }
+  
+    const handleFormSubmit = event => {
+        event.preventDefault()
+        alert(guess)
 
+        if (guess.toLowerCase().trim() === answer[x].toLowerCase() && round === 10) {
+            //   winner
+            setData({...data,
+                passed:true
+            })
+            visible=false
+        } else if (guess.toLowerCase().trim() === answer[x].toLowerCase()) {
+            let currentScore = score
+            currentScore++
+            let currentRound = round
+            currentRound++
+            let currentX = x
+            currentX++
+            setData({
+                ...data,
+                score: currentScore,
+                round: currentRound,
+                x: currentX
+            })            
+        } else {
+            alert("Wrong" + answer[x])
+            let currentRound = round
+            currentRound++
+            let currentLives = lives
+            currentLives--
+            let currentX = x
+            currentX++
+            setData({
+                ...data,
+                lives: currentLives,
+                round: currentRound,
+                x: currentX,             
+            })
+        } if (lives === 1) {
+            alert("You lose")
+            visible=false           
+        }
+
+    }
+    
     return (
         <div>
             <GameBox>
@@ -140,10 +146,7 @@ const GameWrapper = (props) => {
                 />
             </GameBox>
             <Results>
-                <WinnerWindow
-                    score={score}
-                />
-                <LoserWindow />
+               <EndGame passed={true}/>
             </Results>
         </div>
     )

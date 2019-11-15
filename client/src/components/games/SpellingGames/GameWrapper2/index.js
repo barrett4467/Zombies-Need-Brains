@@ -8,7 +8,6 @@ import LoserWindow from "../component/LoserWindow"
 import QAData from "../data/questions"
 
 let visible = true
-
 let display = () => {
     if (visible) {
         display = "block"
@@ -29,6 +28,7 @@ let display1 = () => {
 }
 const GameBox = styled.section`
 display:${display};
+background:white
 `
 const Results = styled.section`
 display:${display1};
@@ -43,20 +43,42 @@ const GameWrapper2 = (props) => {
         lives: 3,
         round: 1,
         guess: "",
-        x: 0,
-        // y: 1,
-        qX: "",
-        level: 1,
-        question:
-            QAData[1].game1.q1,
+        x: 0,        
+        question:QAData[1].game1.q1,
         answer: QAData[1].game1.a1,
-
-        toggle: false
+        passed: false,
 
     })
-    const { guess, qA, score, answer, question, lives, round, x, qX, level } = data;
+    const { guess, passed, score, answer, question, lives, round, x, qX, level } = data;
 
+    const EndGame= ()=>{
+        if(passed){
+            return<WinnerWindow
+            score={score}/>
+        }else {return <LoserWindow
+            playAgain={playAgain}
+        />}
+    }
 
+    const playAgain = event => {
+        event.preventDefault()     
+        visible=true
+        let currentRound = round
+        currentRound = 1
+        let currentLives = lives
+        currentLives = 3
+        let currentX = x
+        currentX = 0
+        let currentScore = score
+        currentScore = 0
+        setData({
+            ...data,
+            lives: currentLives,
+            round: currentRound,
+            x: currentX,
+            score: currentScore,
+        })
+    }
     const handleInputChange = event => {
         setData({
             ...data,
@@ -66,10 +88,9 @@ const GameWrapper2 = (props) => {
 
     const handleFormSubmit = event => {
         event.preventDefault()
-        alert(guess)
-
+        
         if (guess.toLowerCase().trim() === answer[x].toLowerCase() && round === 10) {
-            alert("winner")
+            visible=false
         } else if (guess.toLowerCase().trim() === answer[x].toLowerCase()) {
             let currentScore = score
             currentScore++
@@ -99,31 +120,12 @@ const GameWrapper2 = (props) => {
                 x: currentX
             })
         } if (lives === 1) {
-            alert("You lose")
-            // useEffect.playAgain()
+            visible=false
+           
         }
 
     }
-    const playAgain = event => {
-        event.preventDefault()
-        let currentRound = round
-        currentRound = 1
-        let currentLives = lives
-        currentLives = 3
-        let currentX = x
-        currentX = 0
-        let currentScore = score
-        currentScore = 0
-        setData({
-            ...data,
-            lives: currentLives,
-            round: currentRound,
-            x: currentX,
-            score: currentScore,
-            toggle: true,
-        })
-    }
-
+   
 
     return (
         <div>
@@ -145,10 +147,7 @@ const GameWrapper2 = (props) => {
                 />
             </GameBox>
             <Results>
-                <WinnerWindow
-                    score={score}
-                />
-                <LoserWindow />
+               <EndGame passed={true}/>
             </Results>
         </div>
     )

@@ -12,7 +12,8 @@ const LoserWindow = (props) => {
         <hr className="my-2" />
         <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
         <p className="lead">
-          <Button color="primary">Thanks For Playing</Button>
+          <Button>Thanks For Playing</Button>
+          <Button onClick={props.playAgain}>Play Again</Button>
         </p>
       </Jumbotron>
 
