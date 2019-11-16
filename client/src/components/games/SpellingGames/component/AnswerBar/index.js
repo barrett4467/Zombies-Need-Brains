@@ -1,19 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import { Button, Form, FormGroup, Label, Input, } from "reactstrap"
+import React, { useState,} from 'react';
+import { Button, Form, FormGroup, Input, } from "reactstrap"
 
 
 const AnswerBar = (props) => {
 
     return (
         <div>
-            <Form>
-                <FormGroup>
+            <Form onSubmit={props.handleFormSubmit}>
+                <FormGroup >
                     <Input 
                     name="text"
-                    id="exampleText"
-                    onChange={props.handleInputChange} />
+                    id="answerBox"
+                    onChange={props.handleInputChange}
+                     />
                 </FormGroup>
-                <Button onClick={props.handleFormSubmit}>Submit</Button>
+                <Button type="submit">Submit</Button>
             </Form>
         </div>
     )

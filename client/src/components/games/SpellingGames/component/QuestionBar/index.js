@@ -1,17 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import { Button, Form, FormGroup, Label, Input, } from "reactstrap"
+import React, { useState} from 'react';
+import styled from "styled-components";
+const ImgWrapper= styled.section`
+img{
+    width:250px;
+}
+`
 
 
-const GameWrapper = (props) => {
+const QuestionBar = (props) => {
 
     return (
         <div>
-            <div className="questionBox">
-                <p>Image</p>
+            <div className="questionBox">                
+                <ImgWrapper>
+                    <img src={`${process.env.PUBLIC_URL}/${props.image}`} />                
+                </ImgWrapper>
                 <h2>{props.question}</h2>
-                 <p>{props.x}</p>
             </div>            
         </div>
+        
     )
 }
-export default GameWrapper
+export default QuestionBar

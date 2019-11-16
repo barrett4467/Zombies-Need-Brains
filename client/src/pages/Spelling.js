@@ -1,38 +1,44 @@
 import React, { useState } from 'react';
-import { Button, Fade } from "reactstrap"
+import { Button, } from "reactstrap"
 import { BrowserRouter as Router, Link, NavLink, Switch, Route } from "react-router-dom"
+import styled from "styled-components";
 import GameWrapper from "../components/games/SpellingGames/GameWrapper"
 import GameWrapper2 from "../components/games/SpellingGames/GameWrapper2"
 import GameWrapper3 from "../components/games/SpellingGames/GameWrapper3"
 
 
+
+
+
+const ButtonBar = styled.section`
+img{
+    width:75px;    
+    margin-left:2em
+    margin-top:1em;
+}
+`
+
 const Spelling = () => {
-
-    // const hideButtons =()=> {
-    //     var bb = document.getElementById("buttonBar");
-    //     if (bb.style.display === "none") {
-    //       bb.style.display = "block";
-    //     } else {
-    //       bb.style.display = "none";
-    //     }
-    //   }
-
     return (
         <>
 
             <Router>
                 <>
-                <div className="buttonBar">
-                    <Button>
-                        <Link to="/GameWrapper">Spell The Word</Link>
-                    </Button>
-                    <Button>
-                        <Link to="/GameWrapper2">Fill In The Blank</Link>
-                    </Button>
-                    <Button>
-                        <Link to="/GameWrapper3">Plural Words</Link>
-                    </Button>
-                </div>
+                    <ButtonBar className="bb">
+                        <img src={`${process.env.PUBLIC_URL}/assets/zombies/iceskates.png`} />
+                        <Button>
+                            <Link to="/GameWrapper">Spell The Word</Link>
+                        </Button>
+                        <img src={`${process.env.PUBLIC_URL}/assets/zombies/ace.png`} />
+
+                        <Button>
+                            <Link to="/GameWrapper2">Fill In The Blank</Link>
+                        </Button>
+                        <img src={`${process.env.PUBLIC_URL}/assets/zombies/zombie.png`} />
+                        <Button>
+                            <Link to="/GameWrapper3">Plural Words</Link>
+                        </Button>
+                    </ButtonBar>
                     <Switch>
                         <Route path="/GameWrapper" component={GameWrapper} />
                         <Route path="/GameWrapper2" component={GameWrapper2} />
@@ -41,6 +47,7 @@ const Spelling = () => {
                     </Switch>
                 </>
             </Router>
+
         </>
     )
 

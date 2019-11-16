@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState, } from 'react';
 import styled from "styled-components";
 import StatsBar from "../component/StatsBar"
 import QuestionBar from "../component/QuestionBar"
@@ -8,7 +8,6 @@ import LoserWindow from "../component/LoserWindow"
 import QAData from "../data/questions"
 
 let visible = true
-
 let display = () => {
     if (visible) {
         display = "block"
@@ -29,80 +28,46 @@ let display1 = () => {
 }
 const GameBox = styled.section`
 display:${display};
+background:white;
+padding:1em;
+width:25%;
+margin:auto;
+text-align:center;
 `
 const Results = styled.section`
 display:${display1};
 `
 
-
 const GameWrapper = (props) => {
 
     const [data, setData] = useState({
-        qA: QAData[2],
+        qA: QAData[0],
         score: 0,
         lives: 3,
         round: 1,
         guess: "",
         x: 0,
-        question:
-            QAData[2].game1.q1,
+        question: QAData[2].game1.q1,
         answer: QAData[2].game1.a1,
-
-        toggle: false
+        image: QAData[2].game1.img1,
+        passed: false,
 
     })
-    const { guess, qA, score, answer, question, lives, round, x, } = data;
+    const { guess, qA, score, answer, question, lives, round, x, passed, image } = data;
 
-
-    const handleInputChange = event => {
-        setData({
-            ...data,
-            guess: event.target.value
-        })
-    }
-
-    const handleFormSubmit = event => {
-        event.preventDefault()
-        alert(guess)
-
-        if (guess.toLowerCase().trim() === answer[x].toLowerCase() && round === 10) {
-            alert("winner")
-        } else if (guess.toLowerCase().trim() === answer[x].toLowerCase()) {
-            let currentScore = score
-            currentScore++
-            let currentRound = round
-            currentRound++
-            let currentX = x
-            currentX++
-            setData({
-                ...data,
-                score: currentScore,
-                round: currentRound,
-                x: currentX
-            })
-            alert("correct")
+    const EndGame = () => {
+        if (passed) {
+            return <WinnerWindow
+                score={score} />
         } else {
-            alert("Wrong" + answer[x])
-            let currentRound = round
-            currentRound++
-            let currentLives = lives
-            currentLives--
-            let currentX = x
-            currentX++
-            setData({
-                ...data,
-                lives: currentLives,
-                round: currentRound,
-                x: currentX
-            })
-        } if (lives === 1) {
-            alert("You lose")
-            // useEffect.playAgain()
+            return <LoserWindow
+                playAgain={playAgain}
+            />
         }
-
     }
     const playAgain = event => {
         event.preventDefault()
+        visible = true
         let currentRound = round
         currentRound = 1
         let currentLives = lives
@@ -117,10 +82,57 @@ const GameWrapper = (props) => {
             round: currentRound,
             x: currentX,
             score: currentScore,
-            toggle: true,
+        })
+    }
+    const handleInputChange = event => {
+        setData({
+            ...data,
+            guess: event.target.value
         })
     }
 
+    const handleFormSubmit = event => {
+        event.preventDefault()
+        event.target.reset()
+        if (guess.toLowerCase().trim() === answer[x].toLowerCase() && round === 10) {
+            //   winner
+            setData({
+                ...data,
+                passed: true
+            })
+            visible = false
+        } else if (guess.toLowerCase().trim() === answer[x].toLowerCase()) {
+            let currentScore = score
+            currentScore++
+            let currentRound = round
+            currentRound++
+            let currentX = x
+            currentX++
+            setData({
+                ...data,
+                score: currentScore,
+                round: currentRound,
+                x: currentX,
+            })
+        } else {
+            alert("Wrong" + answer[x])
+            let currentRound = round
+            currentRound++
+            let currentLives = lives
+            currentLives--
+            let currentX = x
+            currentX++
+            setData({
+                ...data,
+                lives: currentLives,
+                round: currentRound,
+                x: currentX,
+            })
+        } if (lives === 1) {
+            alert("You lose")
+            visible = false
+        }
+    }
 
     return (
         <div>
@@ -130,26 +142,22 @@ const GameWrapper = (props) => {
                     lives={lives}
                     score={score}
                 />
-                <QuestionBar
-                    question={question[x]}
-                />
                 <h3>Plural Words!</h3>
                 <p>A plural words indicates that there is more than one of that word</p>
                 <p>What is the plural of {question[x]} ?</p>
+                <QuestionBar
+                    question={question[x]}
+                    image={image[x]}
+                />
                 <AnswerBar
                     handleInputChange={handleInputChange}
                     handleFormSubmit={handleFormSubmit}
                 />
             </GameBox>
             <Results>
-                <WinnerWindow
-                    score={score}
-                />
-                <LoserWindow />
+                <EndGame passed={true} />
             </Results>
-
         </div>
     )
-
 }
 export default GameWrapper
