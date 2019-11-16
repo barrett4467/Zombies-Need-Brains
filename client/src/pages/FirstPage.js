@@ -1,7 +1,8 @@
 import React from "react";
 import Buttons from "../components/Button"
 import { Container } from "reactstrap";
-import Style from "../utils/style";
+
+
 
 function FirstPage () {
     return (
