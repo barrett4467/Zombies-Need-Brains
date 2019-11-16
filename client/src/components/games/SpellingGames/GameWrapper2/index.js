@@ -29,6 +29,10 @@ let display1 = () => {
 const GameBox = styled.section`
 display:${display};
 background:white
+padding:1em;
+width:25%;
+margin:auto;
+text-align:center;
 `
 const Results = styled.section`
 display:${display1};
@@ -43,27 +47,29 @@ const GameWrapper2 = (props) => {
         lives: 3,
         round: 1,
         guess: "",
-        x: 0,        
-        question:QAData[1].game1.q1,
+        x: 0,
+        question: QAData[1].game1.q1,
         answer: QAData[1].game1.a1,
         image: QAData[1].game1.img1,
         passed: false,
 
     })
-    const {guess, passed, score, answer, question, lives, round, x, image, level } = data;
+    const { guess, passed, score, answer, question, lives, round, x, image, level } = data;
 
-    const EndGame= ()=>{
-        if(passed){
-            return<WinnerWindow
-            score={score}/>
-        }else {return <LoserWindow
-            playAgain={playAgain}
-        />}
+    const EndGame = () => {
+        if (passed) {
+            return <WinnerWindow
+                score={score} />
+        } else {
+            return <LoserWindow
+                playAgain={playAgain}
+            />
+        }
     }
 
     const playAgain = event => {
-        event.preventDefault()     
-        visible=true
+        event.preventDefault()
+        visible = true
         let currentRound = round
         currentRound = 1
         let currentLives = lives
@@ -86,12 +92,12 @@ const GameWrapper2 = (props) => {
             guess: event.target.value
         })
     }
-
+    
     const handleFormSubmit = event => {
         event.preventDefault()
-        
+        event.target.reset()        
         if (guess.toLowerCase().trim() === answer[x].toLowerCase() && round === 10) {
-            visible=false
+            visible = false
         } else if (guess.toLowerCase().trim() === answer[x].toLowerCase()) {
             let currentScore = score
             currentScore++
@@ -121,35 +127,32 @@ const GameWrapper2 = (props) => {
                 x: currentX
             })
         } if (lives === 1) {
-            visible=false
-           
+            visible = false
         }
-
     }
-   
+
 
     return (
         <div>
             <GameBox>
-
                 <StatsBar
                     round={round}
                     lives={lives}
                     score={score}
                 />
+                <h3>Fill In The Blank!</h3>
+                <p>Fill In The Missing Letters!</p>
                 <QuestionBar
                     question={question[x]}
                     image={image[x]}
                 />
-                <h3>Fill In The Blank!</h3>
-                <p>Fill In The Missing Letters!</p>
                 <AnswerBar
                     handleInputChange={handleInputChange}
                     handleFormSubmit={handleFormSubmit}
                 />
             </GameBox>
             <Results>
-               <EndGame passed={true}/>
+                <EndGame passed={true} />
             </Results>
         </div>
     )

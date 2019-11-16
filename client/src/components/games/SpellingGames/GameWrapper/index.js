@@ -28,7 +28,11 @@ let display1 = () => {
 }
 const GameBox = styled.section`
 display:${display};
-background:white
+background:white;
+padding:1em;
+width:25%;
+margin:auto;
+text-align:center;
 `
 const Results = styled.section`
 display:${display1};
@@ -45,22 +49,25 @@ const GameWrapper = (props) => {
         x: 0,
         question: QAData[0].game1.q1,
         answer: QAData[0].game1.a1,
+        image: QAData[0].game1.img1,
         passed: false,
-        
-    })
-    const { guess, qA, score, answer, question, lives, round, x, passed,  } = data;
 
-    const EndGame= ()=>{
-        if(passed){
-            return<WinnerWindow
-            score={score}/>
-        }else {return <LoserWindow
-            playAgain={playAgain}
-        />}
+    })
+    const { guess, qA, score, answer, question, lives, round, x, passed,image } = data;
+
+    const EndGame = () => {
+        if (passed) {
+            return <WinnerWindow
+                score={score} />
+        } else {
+            return <LoserWindow
+                playAgain={playAgain}
+            />
+        }
     }
     const playAgain = event => {
-        event.preventDefault()     
-        visible=true
+        event.preventDefault()
+        visible = true
         let currentRound = round
         currentRound = 1
         let currentLives = lives
@@ -83,17 +90,17 @@ const GameWrapper = (props) => {
             guess: event.target.value
         })
     }
-  
+
     const handleFormSubmit = event => {
         event.preventDefault()
-        alert(guess)
-
+        event.target.reset()
         if (guess.toLowerCase().trim() === answer[x].toLowerCase() && round === 10) {
             //   winner
-            setData({...data,
-                passed:true
+            setData({
+                ...data,
+                passed: true
             })
-            visible=false
+            visible = false
         } else if (guess.toLowerCase().trim() === answer[x].toLowerCase()) {
             let currentScore = score
             currentScore++
@@ -105,8 +112,8 @@ const GameWrapper = (props) => {
                 ...data,
                 score: currentScore,
                 round: currentRound,
-                x: currentX
-            })            
+                x: currentX,             
+            })
         } else {
             alert("Wrong" + answer[x])
             let currentRound = round
@@ -119,15 +126,14 @@ const GameWrapper = (props) => {
                 ...data,
                 lives: currentLives,
                 round: currentRound,
-                x: currentX,             
+                x: currentX,              
             })
         } if (lives === 1) {
             alert("You lose")
-            visible=false           
-        }
-
+            visible = false
+        }        
     }
-    
+
     return (
         <div>
             <GameBox>
@@ -136,17 +142,18 @@ const GameWrapper = (props) => {
                     lives={lives}
                     score={score}
                 />
+                <h3>Spell The Word!</h3>
                 <QuestionBar
                     question={question[x]}
+                    image={image[x]}
                 />
-                <h3>Spell The Word!</h3>
                 <AnswerBar
                     handleInputChange={handleInputChange}
                     handleFormSubmit={handleFormSubmit}
                 />
             </GameBox>
             <Results>
-               <EndGame passed={true}/>
+                <EndGame passed={true} />
             </Results>
         </div>
     )

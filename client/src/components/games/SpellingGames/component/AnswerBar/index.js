@@ -10,7 +10,7 @@ const AnswerBar = (props) => {
                 <FormGroup >
                     <Input 
                     name="text"
-                    id="exampleText"
+                    id="answerBox"
                     onChange={props.handleInputChange}
                      />
                 </FormGroup>
