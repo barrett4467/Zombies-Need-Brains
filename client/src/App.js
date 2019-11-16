@@ -6,7 +6,7 @@ import Badges from "./pages/Badges";
 import LogIn from "./pages/LogIn";
 import SignUp from "./pages/SignUp";
 import Spelling from "./pages/Spelling";
-import MathGame from "./pages/Math/MathGame";
+import MathGame from "./components/games/Math/MathGame";
 import NoMatch from "./pages/NoMatch";
 import FirstPage from "./pages/FirstPage"
 

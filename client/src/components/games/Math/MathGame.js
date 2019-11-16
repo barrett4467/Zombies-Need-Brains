@@ -1,17 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter as  Router, Route, Switch, Link } from "react-router-dom";
-import mathQuestions from "../../utils/mathQuestions";
+import mathQuestions from "../../../utils/mathQuestions";
 import styled from "styled-components";
-import { createBrowserHistory} from "history";
+
+
 
 const ProblemWrapper = styled.section`
     text-align: center;
-    background-color: white;
-    h3: {
-        background-color: white;
-        font-size: 25px;
-        padding: 15px;
-    }
+    background-image: url("https://store-images.s-microsoft.com/image/apps.4851.68871528329885281.e03a829d-faa0-4a31-a5d8-785bb8b52288.f024a10d-396d-4f40-b63c-899ef8a8cb04?mode=scale&q=90&h=1080&w=1920")
+`
+
+const MathLinks = styled.section`
+    position: relative;
+    float: left;
+    background-color: #ffffff;
+    font-size: 25px;
+    width: 177px;
+    margin: 10px;
+    padding: 15px;
+`
+const Card = styled.section`
+    background-color: #ffffff;
+    font-size: 45px;
+    width: 60px;
+    margin: 0 auto;
+    padding: 16px;
+    border: 2px solid black;
+`
+const OperatorCard = styled.section`
+    background-color: #ffffff;
+    font-size: 45px;
+    margin: 0 auto;
+    border: 2px solid black;
+    width: 35px;
+    
+`
+const Answers = styled.section`
+    font-size: 25px;
+    margin: 0 auto;
+    width: 250px;
+    height: 90px;
 `
 
 let questions = mathQuestions;
@@ -79,20 +107,79 @@ const divisionQuestions = [
     },
 ]
 
+const subtractionQuestions = [
+    {
+        num1: 7,
+        num2: 1,
+        guessed: false
+    },
+    {
+        num1: 9,
+        num2: 2,
+        guessed: false
+    },
+    {
+        num1: 10,
+        num2: 4,
+        guessed: false
+    },
+    {
+        num1: 8,
+        num2: 3,
+        guessed: false
+    },
+    {
+        num1: 5,
+        num2: 4,
+        guessed: false
+    },
+    {
+        num1: 1,
+        num2: 1,
+        guessed: false
+    },
+    {
+        num1: 9,
+        num2: 6,
+        guessed: false
+    },
+    {
+        num1: 10,
+        num2: 9,
+        guessed: false
+    },
+    {
+        num1: 2,
+        num2: 2,
+        guessed: false
+    },
+    {
+        num1: 7,
+        num2: 2,
+        guessed: false
+    },
+]
 
 const display = () => {
     return(
         <ProblemWrapper>
-            <h3 id="num1">{questions[num1].num1}</h3>
-            <p id="operation">{operator}</p>
-            <h3 id="num2">{questions[num2].num2}</h3>
-            <h3>______</h3>
+            <Card>
+                <h3 id="num1">{questions[num1].num1}</h3>
+            </Card>
+            <OperatorCard>
+                <p id="operation">{operator}</p>
+            </OperatorCard>
+            <Card>
+                <h3 id="num2">{questions[num2].num2}</h3>
+            </Card>
             <form>
                 <input type="text" placeholder="Answer" id="answer"></input>
                 <button id="submit" onClick={handleSubmit}>Submit</button>
             </form>
-            <p id="userAnswer"></p>
-            <p id="correctAnswer"></p>
+            <Answers>
+                <p id="userAnswer"></p>
+                <p id="correctAnswer"></p>
+            </Answers>
         </ProblemWrapper>
     )
 }
@@ -182,17 +269,16 @@ const calculateAnswer = () => {
 const MathHome = () => {
     return(
         <>
-            <Link to="/math/addition">Addition</Link>
-            <Link to="/math/subtraction">Subtraction</Link>
-            <Link to="/math/multiplication">Multiplication</Link>
-            <Link to="/math/division">Division</Link> 
+            <Link to="/math/addition" className="link"><MathLinks>Addition</MathLinks></Link>
+            <Link to="/math/subtraction" className="link"><MathLinks>Subtraction</MathLinks></Link>
+            <Link to="/math/multiplication" className="link"><MathLinks>Multiplication</MathLinks></Link>
+            <Link to="/math/division" className="link"><MathLinks>Division</MathLinks></Link> 
         </>
     )
 }
 
 
 const DisplayProblem = (props) => {
-    
     const url = props.match.url;
     const urlSplit = url.split("/");
     operator = urlSplit[2];
@@ -202,6 +288,7 @@ const DisplayProblem = (props) => {
             break
         case "subtraction":
             operator = "-";
+            questions= subtractionQuestions
             break
         case "multiplication":
             operator = "x";
@@ -223,15 +310,13 @@ const DisplayProblem = (props) => {
 const MathGame = () => {
     return(
         <>
-            <Router>
-                <Switch>
-                <Route exact path={"/math/"} component={MathHome} />
-                <Route exact path={"/math/addition"} component={DisplayProblem} />
-                <Route exact path={"/math/subtraction"} component={DisplayProblem} />
-                <Route exact path={"/math/multiplication"} component={DisplayProblem} />
-                <Route exact path={"/math/division"} component={DisplayProblem} />
-                </Switch>
-            </Router>
+            <Switch>
+            <Route exact path={"/math/"} component={MathHome} />
+            <Route exact path={"/math/addition"} component={DisplayProblem} />
+            <Route exact path={"/math/subtraction"} component={DisplayProblem} />
+            <Route exact path={"/math/multiplication"} component={DisplayProblem} />
+            <Route exact path={"/math/division"} component={DisplayProblem} />
+            </Switch>
         </>
     )
 }
