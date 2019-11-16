@@ -2,8 +2,6 @@ import React from "react";
 import Buttons from "../components/Button"
 import { Container } from "reactstrap";
 
-
-
 function FirstPage () {
     return (
         <Container style={{textAlign: "center"}}>
