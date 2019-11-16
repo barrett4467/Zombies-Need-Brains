@@ -12,10 +12,8 @@ class Chart extends React.Component{
                 datasets: [{
                     data: [this.completed, this.notCompleted ],
                     backgroundColor: [
-                        '#10eb4b',
-                        '#f73307',
-                        '#cc65fe',
-                        '#ffce56'
+                        '#29A506',
+                        '#540173',
                     ]
                 }],
                 labels: ['Completed', 'Not Completed']

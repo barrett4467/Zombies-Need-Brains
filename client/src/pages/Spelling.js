@@ -16,6 +16,18 @@ img{
     margin-left:2em
     margin-top:1em;
 }
+button{
+    margin: 1%;
+    padding: 20px;
+    font-size: 25px;
+    background-color: #012622;
+    border: 2px solid #29A506;
+    color: white;
+
+}
+a{
+    color: white;
+}
 `
 
 const Spelling = () => {
@@ -27,7 +39,7 @@ const Spelling = () => {
                     <ButtonBar className="bb">
                         <img src={`${process.env.PUBLIC_URL}/assets/zombies/iceskates.png`} />
                         <Button>
-                            <Link to="/GameWrapper">Spell The Word</Link>
+                            <Link to="/gamewrapper">Spell The Word</Link>
                         </Button>
                         <img src={`${process.env.PUBLIC_URL}/assets/zombies/ace.png`} />
 

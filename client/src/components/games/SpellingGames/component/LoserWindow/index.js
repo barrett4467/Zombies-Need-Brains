@@ -14,7 +14,7 @@ img{
 `
 
 const LoserWindow = (props) => {
-
+  console.log(props.playAgain);
   const [tooltipOpen, setTooltipOpen] = useState(false);
   const toggle = () => setTooltipOpen(!tooltipOpen);
 
@@ -27,7 +27,7 @@ const LoserWindow = (props) => {
           <p className="lead">Try to do better next time</p>
           <hr className="my-2" />
           <ZombieDiv>
-            <img src={`${process.env.PUBLIC_URL}/assets/zombies/paperzombie.png`}/>             
+            <img src={`${process.env.PUBLIC_URL}/assets/zombies/paperzombie.png`} alt="zombie"/>             
           </ZombieDiv>
           <p className="lead">
             <Button>Thanks For Playing</Button>

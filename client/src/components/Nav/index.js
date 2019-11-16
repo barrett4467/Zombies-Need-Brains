@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import NavDrop from "../DropDown";
 
 function NavBar() {
+    
     return (
         <>
             <nav className="navbar">
