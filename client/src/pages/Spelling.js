@@ -27,7 +27,7 @@ const Spelling = () => {
                     <ButtonBar className="bb">
                         <img src={`${process.env.PUBLIC_URL}/assets/zombies/iceskates.png`} />
                         <Button>
-                            <Link to="/GameWrapper">Spell The Word</Link>
+                            <Link to="/gamewrapper">Spell The Word</Link>
                         </Button>
                         <img src={`${process.env.PUBLIC_URL}/assets/zombies/ace.png`} />
 

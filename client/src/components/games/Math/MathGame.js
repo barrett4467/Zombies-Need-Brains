@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { BrowserRouter as  Router, Route, Switch, Link } from "react-router-dom";
 import mathQuestions from "../../../utils/mathQuestions";
 import styled from "styled-components";
+import LoserWindow from "../SpellingGames/component/LoserWindow";
+import WinnerWindow from "../SpellingGames/component/WinnerWindow";
 
 
 
@@ -13,7 +15,9 @@ const ProblemWrapper = styled.section`
 const MathLinks = styled.section`
     position: relative;
     float: left;
-    background-color: #ffffff;
+    background-color: #012622;
+    border: 2px solid #29A506;
+    color: white;
     font-size: 25px;
     width: 177px;
     margin: 10px;
@@ -46,6 +50,7 @@ let questions = mathQuestions;
 let num1 = 0;
 let num2 = 0;
 let index = 0;
+let score = 0;
 let wrongAnswers = [];
 let numWrong = 0;
 
@@ -162,31 +167,36 @@ const subtractionQuestions = [
 
 const display = () => {
     return(
-        <ProblemWrapper>
-            <Card>
-                <h3 id="num1">{questions[num1].num1}</h3>
-            </Card>
-            <OperatorCard>
-                <p id="operation">{operator}</p>
-            </OperatorCard>
-            <Card>
-                <h3 id="num2">{questions[num2].num2}</h3>
-            </Card>
-            <form>
-                <input type="text" placeholder="Answer" id="answer"></input>
-                <button id="submit" onClick={handleSubmit}>Submit</button>
-            </form>
-            <Answers>
-                <p id="userAnswer"></p>
-                <p id="correctAnswer"></p>
-            </Answers>
-        </ProblemWrapper>
+        <div id="problem">
+            <ProblemWrapper>
+                    <Card>
+                        <h3 id="num1">{questions[num1].num1}</h3>
+                    </Card>
+                    <OperatorCard>
+                        <p id="operation">{operator}</p>
+                    </OperatorCard>
+                    <Card>
+                        <h3 id="num2">{questions[num2].num2}</h3>
+                    </Card>
+                    <form>
+                        <input type="text" placeholder="Answer" id="answer"></input>
+                        <button id="submit" onClick={handleSubmit}>Submit</button>
+                    </form>
+                    <div id="warning"></div>
+                    <Answers>
+                        <p id="userAnswer"></p>
+                        <p id="correctAnswer"></p>
+                    </Answers>
+            </ProblemWrapper>
+        </div>
     )
 }
 
 const nextLevel = () => {
-    alert(`You win: ${numWrong} questions were guessed incorrectly`);
-
+    // alert(`You win: ${numWrong} questions were guessed incorrectly`);
+    window.location= "/math/win";
+    // document.getElementById("problem").innerHTML = "<LoserWindow></LoserWindow>";
+    
 }
 
 const getNewNumber = () => {
@@ -208,31 +218,38 @@ const getNewNumber = () => {
 const handleSubmit = (event) => {
     //prevent refresh
     event.preventDefault();
-    //gets value that use types in field
-    userAnswer = parseInt(document.getElementById("answer").value);
+    if (document.getElementById("answer").value !==  "" && typeof parseInt(document.getElementById("answer").value) === "number"){
+        //gets value that use types in field
+        userAnswer = parseInt(document.getElementById("answer").value);
 
-    //equates the math problem
-    calculateAnswer();
+        //equates the math problem
+        calculateAnswer();
 
-    //puts user answer and correct answer to the page 
-    document.getElementById("userAnswer").innerHTML = `Your Answer: ${userAnswer}`;
-    document.getElementById("correctAnswer").innerHTML = `Correct Answer: ${correctAnswer}`
+        //puts user answer and correct answer to the page 
+        document.getElementById("userAnswer").innerHTML = `Your Answer: ${userAnswer}`;
+        document.getElementById("correctAnswer").innerHTML = `Correct Answer: ${correctAnswer}`
 
-    //clears the input field
-    document.getElementById("answer").value = "";
-    //generates a new problem 
-    console.log(numWrong);
-    if (numWrong === 3){
-        alert("You lose!");
-    }else {
-        getNewNumber();
+        //clears the input field
+        document.getElementById("answer").value = "";
+        //generates a new problem 
+        console.log(numWrong);
+        if (numWrong === 3){
+            numWrong = 0;
+            window.location= "math/lose";
+        }else {
+            getNewNumber();
+        }
+    } else {
+        document.getElementById("warning").innerHTML = "<p>Please input a valid number</p>"
     }
+
 }
 const compare = () => {
     const wrong = () => {
         numWrong++;
     }
     const right = () => {
+        score++;
         questions[index].guessed = true;
     }
         correctAnswer === userAnswer ?  right(): wrong();
@@ -305,7 +322,9 @@ const DisplayProblem = (props) => {
 
         )
 }
-
+const handlePlayAgain = () => {
+    onclick= window.location="/math"
+}
 //the actual math game component
 const MathGame = () => {
     return(
@@ -316,6 +335,8 @@ const MathGame = () => {
             <Route exact path={"/math/subtraction"} component={DisplayProblem} />
             <Route exact path={"/math/multiplication"} component={DisplayProblem} />
             <Route exact path={"/math/division"} component={DisplayProblem} />
+            <Route exact path={"/math/math/lose"} render={(props) => <LoserWindow {...props} playAgain={handlePlayAgain}/>} />
+            <Route exact path={"/math/win"} render={(props) => <WinnerWindow {...props} score={score}/>} />
             </Switch>
         </>
     )

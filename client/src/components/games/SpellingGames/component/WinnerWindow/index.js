@@ -16,14 +16,14 @@ console.log(placeImg)
     <div>
       <Jumbotron>
         <h1 className="display-3">Hello, User!</h1>
-        <p className="lead">Yod Did Great!</p>
+        <p className="lead">You Did Great!</p>
         <hr className="my-2" />
-        <p>You Got {props.score} correct and save {props.score} people by returning their brains! .</p>
-        <img src= {placeImg}/>
+        <p>You Got {props.score} correct and saved {props.score} people by returning their brains! .</p>
+        <img src= {placeImg} alt="place img"/>
         <p className="lead">
           <Button color="primary">Thanks For Playing</Button>
         </p>
-        <img src={`${process.env.PUBLIC_URL}/assets/zombies/paperzombie.png`}/>         
+        <img src={`${process.env.PUBLIC_URL}/assets/zombies/paperzombie.png`} alt="zombie"/>         
       </Jumbotron>
 
     </div>

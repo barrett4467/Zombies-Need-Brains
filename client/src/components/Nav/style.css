@@ -1,11 +1,11 @@
 .navbar {
-    background: dodgerblue;
+    background: #29A506;
     min-height: 70px;
     width: 100%;
     color: ivory;
     font-size: calc(10px + 14 * (100vw - 320px)/ 800);
     white-space: nowrap;
-    border-bottom: solid #2c323c 5px;
+    border-bottom: solid #012622 5px;
 }
 .navbar ul {
     margin: 0;
@@ -26,4 +26,8 @@
     margin-top: 0;
     margin-bottom: 0;
     text-align: center;
+}
+
+.btn {
+    background-color: #012622;
 }

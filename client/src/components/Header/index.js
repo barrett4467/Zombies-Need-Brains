@@ -6,7 +6,7 @@ import WalkingZombie from "../WalkingZombie/";
 const Header = () => {
     return (
         <header className="header">
-            <WalkingZombie></WalkingZombie>    
+            <WalkingZombie location={window.location.href}></WalkingZombie>    
         </header>
     )
 }
