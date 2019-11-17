@@ -1,32 +1,35 @@
 import React, { useState } from 'react';
 import { Button, Jumbotron } from "reactstrap"
+import { BrowserRouter as Link } from "react-router-dom"
+
+
+import styled from "styled-components";
+
+const JumboWrapper = styled.section`
+.jumbo{
+  background:rgb(74, 18, 79);
+  color:#CFD615
+}
+Button{
+  border:4px solid #29A506;
+}
+`
+
 
 const WinnerWindow = (props) => {
- let placeImg=""
-  switch (props.score) {
-    case 10: placeImg= "{`${process.env.PUBLIC_URL}/assets/zombies/medal1.png`}" ;             
 
-      break;
-    case 9:  placeImg= "{`${process.env.PUBLIC_URL}/assets/zombies/medal2.png`}" ;  
-      break;
-    default: placeImg= "{`${process.env.PUBLIC_URL}/assets/zombies/medal3.png`}" ;   
-  }
-console.log(placeImg)
   return (
-    <div>
-      <Jumbotron>
+    <JumboWrapper>
+      <Jumbotron className="jumbo">
         <h1 className="display-3">Hello, User!</h1>
-        <p className="lead">You Did Great!</p>
+        <p>You Did Great!</p>
         <hr className="my-2" />
         <p>You Got {props.score} correct and saved {props.score} people by returning their brains! .</p>
-        <img src= {placeImg} alt="place img"/>
-        <p className="lead">
-          <Button color="primary">Thanks For Playing</Button>
-        </p>
-        <img src={`${process.env.PUBLIC_URL}/assets/zombies/paperzombie.png`} alt="zombie"/>         
+       
+            <Button><Link to="/badges">Thanks for Playing</Link></Button>        
+    
       </Jumbotron>
-
-    </div>
+    </JumboWrapper>
   );
 }
 

@@ -33,6 +33,9 @@ padding:1em;
 width:25%;
 margin:auto;
 text-align:center;
+border:6px solid #29A506;
+background:rgba(74, 18, 79,.75);
+color:#CFD615
 `
 const Results = styled.section`
 display:${display1};
@@ -110,10 +113,9 @@ const GameWrapper2 = (props) => {
                 score: currentScore,
                 round: currentRound,
                 x: currentX
-            })
-            alert("correct")
+            })         
         } else {
-            alert("Wrong" + answer[x])
+            alert("Wrong " + answer[x])
             let currentRound = round
             currentRound++
             let currentLives = lives
