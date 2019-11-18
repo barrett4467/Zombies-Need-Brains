@@ -358,13 +358,14 @@ const handlePlayAgain = () => {
 const Winner = (props) => {
     console.log(props);
     const returnBadges = () => window.location = "/badges";
+    const returnPlayAgain = () => window.location = "/math";
       return (
         <JumboWrapper>
           <Jumbotron className="jumbo">
             <h1 className="display-3">Hello, User!</h1>
             <p>You Did Awesome!!</p>
             <Button onClick={returnBadges}>Thanks For Playing</Button> 
-            <Button onClick={props.playAgain}>Play Again</Button>     
+            <Button onClick={returnPlayAgain}>Play Again</Button>     
         
           </Jumbotron>
         </JumboWrapper>
