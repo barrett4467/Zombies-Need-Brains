@@ -22,6 +22,7 @@ const C = CSSPlugin;
 
 const ZombieComponent = (props) => {
     console.log(props.location)
+    if (props.location === "http://localhost:3000/home" || props.location === "https://lit-crag-22298.herokuapp.com/home"){
         //this is the movement
         let x = 1;
         let count = 0;
@@ -153,4 +154,5 @@ const ZombieComponent = (props) => {
         )
     }
     
+}
 export default ZombieComponent; 
