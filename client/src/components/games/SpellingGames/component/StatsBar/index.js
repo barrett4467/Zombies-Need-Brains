@@ -3,11 +3,13 @@ import styled from "styled-components";
 import { Button, Form, FormGroup, Label, Input, } from "reactstrap"
 
 const Status = styled.header`
-    .questionBox{
-        display:flex;
-        margin:auto;
-        
-    }
+.statsBar{
+    margin:auto;
+    display:flex;
+    text-align:center;
+    padding:0
+    
+}
     p{
         padding:1em;
     }
@@ -18,7 +20,7 @@ const StatsBar = (props) => {
     return (
         <div>
             <Status>
-                <div className="questionBox">
+                <div className="statsBar">
                     <p>Round: {props.round}</p>
                     <p>Lives: {props.lives} </p>
                     <p>Score: {props.score} </p>
