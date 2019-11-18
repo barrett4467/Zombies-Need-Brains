@@ -7,8 +7,12 @@ import styled from "styled-components";
 const Button = styled.button`
     border: 4px solid #29A506;
     padding: 0;
-    
 
+`
+const Wrapper = styled.section`
+    p{
+        font-size: 30px;
+    }
 `
 
 const C = CSSPlugin;
@@ -114,7 +118,7 @@ const ZombieComponent = (props) => {
     }
 
     return (
-        <>
+        <Wrapper>
             <div className="wrapper" id="story">
                 <h1 ref={element => { welcomeRef = element }}>
                     Welcome!
@@ -146,7 +150,7 @@ const ZombieComponent = (props) => {
                 >
                 </Buttons>
             </div>
-        </>
+        </Wrapper>
         )
     }
     

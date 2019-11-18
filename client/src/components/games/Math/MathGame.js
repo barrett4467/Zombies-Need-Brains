@@ -13,6 +13,17 @@ const Wrapper = styled.section`
 
 `
 const ProblemWrapper = styled.section`
+    background:white;
+    padding:1em;
+    width:25%;
+    height: 571px;
+    margin:auto;
+    text-align:center;
+    border:6px solid #29A506;
+    background:rgba(74, 18, 79,.75);
+    p{
+        color:black;
+    }
 `
 
 const MathLinks = styled.section`
@@ -54,6 +65,7 @@ let num1 = 0;
 let num2 = 0;
 let index = 0;
 let score = 0;
+let lives = 3;
 let wrongAnswers = [];
 let numWrong = 0;
 
@@ -187,8 +199,9 @@ const display = () => {
                     </form>
                     <div id="warning"></div>
                     <Answers>
-                        <p id="userAnswer"></p>
-                        <p id="correctAnswer"></p>
+                        <p id="userAnswer">Your Answer: </p>
+                        <p id="correctAnswer">Correct Answer: </p>
+                        <p id="lives">Lives: {lives}</p>
                     </Answers>
             </ProblemWrapper>
         </Wrapper>
@@ -221,6 +234,7 @@ const getNewNumber = () => {
 const handleSubmit = (event) => {
     //prevent refresh
     event.preventDefault();
+    document.getElementById("warning").textContent = "";
     if (document.getElementById("answer").value !==  "" && typeof parseInt(document.getElementById("answer").value) === "number"){
         //gets value that use types in field
         userAnswer = parseInt(document.getElementById("answer").value);
@@ -231,6 +245,7 @@ const handleSubmit = (event) => {
         //puts user answer and correct answer to the page 
         document.getElementById("userAnswer").innerHTML = `Your Answer: ${userAnswer}`;
         document.getElementById("correctAnswer").innerHTML = `Correct Answer: ${correctAnswer}`
+        document.getElementById("lives").innerHTML = `Lives: ${lives}`
 
         //clears the input field
         document.getElementById("answer").value = "";
@@ -250,6 +265,7 @@ const handleSubmit = (event) => {
 const compare = () => {
     const wrong = () => {
         numWrong++;
+        lives--;
     }
     const right = () => {
         score++;
