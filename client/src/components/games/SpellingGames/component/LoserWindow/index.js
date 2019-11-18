@@ -23,6 +23,7 @@ const LoserWindow = (props) => {
   const [tooltipOpen, setTooltipOpen] = useState(false);
   const toggle = () => setTooltipOpen(!tooltipOpen);
 
+  const returnBadges = () => window.location = "/badges";
   return (
     <div>
       <JumboWrapper>
@@ -33,7 +34,7 @@ const LoserWindow = (props) => {
           <ZombieDiv>
             <img src={`${process.env.PUBLIC_URL}/assets/zombies/paperzombie.png`} alt="zombie"/>             
           </ZombieDiv>         
-            <Button>Thanks For Playing</Button>
+            <Button onClick={returnBadges}>Thanks For Playing</Button>
             <Button onClick={props.playAgain}>Play Again</Button>
          </Jumbotron>
       </JumboWrapper>

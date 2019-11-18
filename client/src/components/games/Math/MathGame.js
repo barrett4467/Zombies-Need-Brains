@@ -4,12 +4,27 @@ import mathQuestions from "../../../utils/mathQuestions";
 import styled from "styled-components";
 import LoserWindow from "../SpellingGames/component/LoserWindow";
 import WinnerWindow from "../SpellingGames/component/WinnerWindow";
+import { Button, Jumbotron } from "reactstrap"
 
 
-
-const ProblemWrapper = styled.section`
+const Wrapper = styled.section`
     text-align: center;
-    background-image: url("https://store-images.s-microsoft.com/image/apps.4851.68871528329885281.e03a829d-faa0-4a31-a5d8-785bb8b52288.f024a10d-396d-4f40-b63c-899ef8a8cb04?mode=scale&q=90&h=1080&w=1920")
+    background-image: url("https://store-images.s-microsoft.com/image/apps.4851.68871528329885281.e03a829d-faa0-4a31-a5d8-785bb8b52288.f024a10d-396d-4f40-b63c-899ef8a8cb04?mode=scale&q=90&h=1080&w=1920");
+    height: 1000px;
+
+`
+const ProblemWrapper = styled.section`
+    background:white;
+    padding:1em;
+    width:25%;
+    height: 571px;
+    margin:auto;
+    text-align:center;
+    border:6px solid #29A506;
+    background:rgba(74, 18, 79,.75);
+    p{
+        color:black;
+    }
 `
 
 const MathLinks = styled.section`
@@ -23,7 +38,7 @@ const MathLinks = styled.section`
     margin: 10px;
     padding: 15px;
 `
-const Card = styled.section`
+const FlashCard = styled.section`
     background-color: #ffffff;
     font-size: 45px;
     width: 60px;
@@ -45,12 +60,22 @@ const Answers = styled.section`
     width: 250px;
     height: 90px;
 `
+const JumboWrapper = styled.section`
+.jumbo{
+  background:rgb(74, 18, 79);
+  color:#CFD615
+}
+Button{
+  border:4px solid #29A506;
+}
+`
 
 let questions = mathQuestions;
 let num1 = 0;
 let num2 = 0;
 let index = 0;
 let score = 0;
+let lives = 3;
 let wrongAnswers = [];
 let numWrong = 0;
 
@@ -167,28 +192,29 @@ const subtractionQuestions = [
 
 const display = () => {
     return(
-        <div id="problem">
+        <Wrapper>
             <ProblemWrapper>
-                    <Card>
+                    <FlashCard>
                         <h3 id="num1">{questions[num1].num1}</h3>
-                    </Card>
+                    </FlashCard>
                     <OperatorCard>
                         <p id="operation">{operator}</p>
                     </OperatorCard>
-                    <Card>
+                    <FlashCard>
                         <h3 id="num2">{questions[num2].num2}</h3>
-                    </Card>
+                    </FlashCard>
                     <form>
                         <input type="text" placeholder="Answer" id="answer"></input>
                         <button id="submit" onClick={handleSubmit}>Submit</button>
                     </form>
                     <div id="warning"></div>
                     <Answers>
-                        <p id="userAnswer"></p>
-                        <p id="correctAnswer"></p>
+                        <p id="userAnswer">Your Answer: </p>
+                        <p id="correctAnswer">Correct Answer: </p>
+                        <p id="lives">Lives: {lives}</p>
                     </Answers>
             </ProblemWrapper>
-        </div>
+        </Wrapper>
     )
 }
 
@@ -218,6 +244,7 @@ const getNewNumber = () => {
 const handleSubmit = (event) => {
     //prevent refresh
     event.preventDefault();
+    document.getElementById("warning").textContent = "";
     if (document.getElementById("answer").value !==  "" && typeof parseInt(document.getElementById("answer").value) === "number"){
         //gets value that use types in field
         userAnswer = parseInt(document.getElementById("answer").value);
@@ -228,6 +255,7 @@ const handleSubmit = (event) => {
         //puts user answer and correct answer to the page 
         document.getElementById("userAnswer").innerHTML = `Your Answer: ${userAnswer}`;
         document.getElementById("correctAnswer").innerHTML = `Correct Answer: ${correctAnswer}`
+        document.getElementById("lives").innerHTML = `Lives: ${lives}`
 
         //clears the input field
         document.getElementById("answer").value = "";
@@ -247,9 +275,11 @@ const handleSubmit = (event) => {
 const compare = () => {
     const wrong = () => {
         numWrong++;
+        lives--;
     }
     const right = () => {
         score++;
+        console.log(score);
         questions[index].guessed = true;
     }
         correctAnswer === userAnswer ?  right(): wrong();
@@ -285,12 +315,12 @@ const calculateAnswer = () => {
 //the pages MathHome displays buttons 
 const MathHome = () => {
     return(
-        <>
+        <Wrapper>
             <Link to="/math/addition" className="link"><MathLinks>Addition</MathLinks></Link>
             <Link to="/math/subtraction" className="link"><MathLinks>Subtraction</MathLinks></Link>
             <Link to="/math/multiplication" className="link"><MathLinks>Multiplication</MathLinks></Link>
             <Link to="/math/division" className="link"><MathLinks>Division</MathLinks></Link> 
-        </>
+        </Wrapper>
     )
 }
 
@@ -325,6 +355,21 @@ const DisplayProblem = (props) => {
 const handlePlayAgain = () => {
     onclick= window.location="/math"
 }
+const Winner = (props) => {
+    console.log(props);
+    const returnBadges = () => window.location = "/badges";
+      return (
+        <JumboWrapper>
+          <Jumbotron className="jumbo">
+            <h1 className="display-3">Hello, User!</h1>
+            <p>You Did Awesome!!</p>
+            <Button onClick={returnBadges}>Thanks For Playing</Button> 
+            <Button onClick={props.playAgain}>Play Again</Button>     
+        
+          </Jumbotron>
+        </JumboWrapper>
+      );
+    }
 //the actual math game component
 const MathGame = () => {
     return(
@@ -336,7 +381,8 @@ const MathGame = () => {
             <Route exact path={"/math/multiplication"} component={DisplayProblem} />
             <Route exact path={"/math/division"} component={DisplayProblem} />
             <Route exact path={"/math/math/lose"} render={(props) => <LoserWindow {...props} playAgain={handlePlayAgain}/>} />
-            <Route exact path={"/math/win"} render={(props) => <WinnerWindow {...props} score={score}/>} />
+            <Route exact path={"/math/win"} component={Winner} />
+            {/* <Route exact path={"/math/win"} render={(props) => <WinnerWindow {...props} score={score}/>} /> */}
             </Switch>
         </>
     )

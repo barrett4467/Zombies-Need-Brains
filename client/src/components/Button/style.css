@@ -3,12 +3,13 @@ button {
     padding: 20px;
     font-size: 25px;
     background-color: #012622;
-    border: 2px solid #29A50;
+    border: 2px solid #29A506;
     color: white;
 }
 
 #mathButton {
     background-image: url("https://media.istockphoto.com/vectors/colorful-mathematics-or-math-education-background-texture-in-vector-vector-id940178214?k=6&m=940178214&s=170667a&w=0&h=u8dsy69JQIy9nfNQHbFIz52KUzEPP380Vxx7m3TzujA=");
+    background-color: #012622;
     background-size: 65%;
     color: ivory;
     width: 25%;

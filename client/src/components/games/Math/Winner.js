@@ -16,7 +16,7 @@ Button{
 `
 
 
-const WinnerWindow = (props) => {
+const Winner = (props) => {
 console.log(props);
 const returnBadges = () => window.location = "/badges";
   return (
@@ -25,7 +25,6 @@ const returnBadges = () => window.location = "/badges";
         <h1 className="display-3">Hello, User!</h1>
         <p>You Did Great!</p>
         <hr className="my-2" />
-        <p>You Got {props.score} correct and saved {props.score} people by returning their brains! .</p>
         <Button onClick={returnBadges}>Thanks For Playing</Button> 
         <Button onClick={props.playAgain}>Play Again</Button>     
     
@@ -34,4 +33,4 @@ const returnBadges = () => window.location = "/badges";
   );
 }
 
-export default WinnerWindow;
+export default Winner;

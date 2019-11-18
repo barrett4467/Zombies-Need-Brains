@@ -61,7 +61,8 @@ const GameWrapper = (props) => {
     const EndGame = () => {
         if (passed) {
             return <WinnerWindow
-                score={score} />
+                score={score} 
+                playAgain={playAgain}/>
         } else {
             return <LoserWindow
                 playAgain={playAgain}

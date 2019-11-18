@@ -7,8 +7,12 @@ import styled from "styled-components";
 const Button = styled.button`
     border: 4px solid #29A506;
     padding: 0;
-    
 
+`
+const Wrapper = styled.section`
+    p{
+        font-size: 30px;
+    }
 `
 
 const C = CSSPlugin;
@@ -114,7 +118,7 @@ const ZombieComponent = (props) => {
     }
 
     return (
-        <>
+        <Wrapper>
             <div className="wrapper" id="story">
                 <h1 ref={element => { welcomeRef = element }}>
                     Welcome!
@@ -126,10 +130,10 @@ const ZombieComponent = (props) => {
             </div>
                 <div ref={element => { playStopRef = element }}>
                 <Button>
-                    <button class="playStop" onClick={handleStart}>Play</button>
+                    <button className="playStop" onClick={handleStart}>Play</button>
                 </Button>
                 <Button>
-                    <button class="playStop" onClick={handleStop}>Stop</button>
+                    <button className="playStop" onClick={handleStop}>Stop</button>
                 </Button>
                 </div>
             <div className="buttonHolder" style={{ textAlign: "center" }} ref={element => { buttonRef = element }}>
@@ -146,7 +150,7 @@ const ZombieComponent = (props) => {
                 >
                 </Buttons>
             </div>
-        </>
+        </Wrapper>
         )
     }
     
