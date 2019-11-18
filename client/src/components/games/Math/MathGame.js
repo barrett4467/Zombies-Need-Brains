@@ -4,6 +4,7 @@ import mathQuestions from "../../../utils/mathQuestions";
 import styled from "styled-components";
 import LoserWindow from "../SpellingGames/component/LoserWindow";
 import WinnerWindow from "../SpellingGames/component/WinnerWindow";
+import { Button, Jumbotron } from "reactstrap"
 
 
 const Wrapper = styled.section`
@@ -58,6 +59,15 @@ const Answers = styled.section`
     margin: 0 auto;
     width: 250px;
     height: 90px;
+`
+const JumboWrapper = styled.section`
+.jumbo{
+  background:rgb(74, 18, 79);
+  color:#CFD615
+}
+Button{
+  border:4px solid #29A506;
+}
 `
 
 let questions = mathQuestions;
@@ -269,6 +279,7 @@ const compare = () => {
     }
     const right = () => {
         score++;
+        console.log(score);
         questions[index].guessed = true;
     }
         correctAnswer === userAnswer ?  right(): wrong();
@@ -344,6 +355,21 @@ const DisplayProblem = (props) => {
 const handlePlayAgain = () => {
     onclick= window.location="/math"
 }
+const Winner = (props) => {
+    console.log(props);
+    const returnBadges = () => window.location = "/badges";
+      return (
+        <JumboWrapper>
+          <Jumbotron className="jumbo">
+            <h1 className="display-3">Hello, User!</h1>
+            <p>You Did Awesome!!</p>
+            <Button onClick={returnBadges}>Thanks For Playing</Button> 
+            <Button onClick={props.playAgain}>Play Again</Button>     
+        
+          </Jumbotron>
+        </JumboWrapper>
+      );
+    }
 //the actual math game component
 const MathGame = () => {
     return(
@@ -355,7 +381,7 @@ const MathGame = () => {
             <Route exact path={"/math/multiplication"} component={DisplayProblem} />
             <Route exact path={"/math/division"} component={DisplayProblem} />
             <Route exact path={"/math/math/lose"} render={(props) => <LoserWindow {...props} playAgain={handlePlayAgain}/>} />
-            <Route exact path={"/math/win"} render={(props) => <WinnerWindow {...props} score={score} playAgain={handlePlayAgain}/>} />
+            <Route exact path={"/math/win"} component={Winner} />
             {/* <Route exact path={"/math/win"} render={(props) => <WinnerWindow {...props} score={score}/>} /> */}
             </Switch>
         </>
