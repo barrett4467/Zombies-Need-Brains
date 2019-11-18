@@ -9,7 +9,7 @@ const Button = styled.button`
     padding: 0;
 
 `
-const Wrapper = styled.section`
+const StoryWrapper = styled.section`
     p{
         font-size: 30px;
     }
@@ -118,7 +118,7 @@ const ZombieComponent = (props) => {
     }
 
     return (
-        <Wrapper>
+        <StoryWrapper>
             <div className="wrapper" id="story">
                 <h1 ref={element => { welcomeRef = element }}>
                     Welcome!
@@ -129,11 +129,11 @@ const ZombieComponent = (props) => {
 
             </div>
                 <div ref={element => { playStopRef = element }}>
-                <Button>
-                    <button className="playStop" onClick={handleStart}>Play</button>
+                <Button className="playStop" onClick={handleStart}>
+                    Play
                 </Button>
-                <Button>
-                    <button className="playStop" onClick={handleStop}>Stop</button>
+                <Button className="playStop" onClick={handleStop}>
+                    Stop
                 </Button>
                 </div>
             <div className="buttonHolder" style={{ textAlign: "center" }} ref={element => { buttonRef = element }}>
@@ -150,7 +150,7 @@ const ZombieComponent = (props) => {
                 >
                 </Buttons>
             </div>
-        </Wrapper>
+        </StoryWrapper>
         )
     }
     
