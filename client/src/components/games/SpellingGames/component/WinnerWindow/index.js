@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Button, Jumbotron } from "reactstrap"
 import { BrowserRouter as Link } from "react-router-dom"
 
@@ -17,7 +17,8 @@ Button{
 
 
 const WinnerWindow = (props) => {
-
+console.log(props);
+const returnBadges = () => window.location = "/badges";
   return (
     <JumboWrapper>
       <Jumbotron className="jumbo">
@@ -25,8 +26,8 @@ const WinnerWindow = (props) => {
         <p>You Did Great!</p>
         <hr className="my-2" />
         <p>You Got {props.score} correct and saved {props.score} people by returning their brains! .</p>
-       
-            <Button><Link to="/badges">Thanks for Playing</Link></Button>        
+        <Button onClick={returnBadges}>Thanks For Playing</Button> 
+        <Button onClick={props.playAgain}>Play Again</Button>     
     
       </Jumbotron>
     </JumboWrapper>

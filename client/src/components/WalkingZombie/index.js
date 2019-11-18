@@ -126,10 +126,10 @@ const ZombieComponent = (props) => {
             </div>
                 <div ref={element => { playStopRef = element }}>
                 <Button>
-                    <button class="playStop" onClick={handleStart}>Play</button>
+                    <button className="playStop" onClick={handleStart}>Play</button>
                 </Button>
                 <Button>
-                    <button class="playStop" onClick={handleStop}>Stop</button>
+                    <button className="playStop" onClick={handleStop}>Stop</button>
                 </Button>
                 </div>
             <div className="buttonHolder" style={{ textAlign: "center" }} ref={element => { buttonRef = element }}>

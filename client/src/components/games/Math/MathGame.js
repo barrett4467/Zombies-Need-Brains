@@ -6,10 +6,13 @@ import LoserWindow from "../SpellingGames/component/LoserWindow";
 import WinnerWindow from "../SpellingGames/component/WinnerWindow";
 
 
-
-const ProblemWrapper = styled.section`
+const Wrapper = styled.section`
     text-align: center;
-    background-image: url("https://store-images.s-microsoft.com/image/apps.4851.68871528329885281.e03a829d-faa0-4a31-a5d8-785bb8b52288.f024a10d-396d-4f40-b63c-899ef8a8cb04?mode=scale&q=90&h=1080&w=1920")
+    background-image: url("https://store-images.s-microsoft.com/image/apps.4851.68871528329885281.e03a829d-faa0-4a31-a5d8-785bb8b52288.f024a10d-396d-4f40-b63c-899ef8a8cb04?mode=scale&q=90&h=1080&w=1920");
+    height: 1000px;
+
+`
+const ProblemWrapper = styled.section`
 `
 
 const MathLinks = styled.section`
@@ -23,7 +26,7 @@ const MathLinks = styled.section`
     margin: 10px;
     padding: 15px;
 `
-const Card = styled.section`
+const FlashCard = styled.section`
     background-color: #ffffff;
     font-size: 45px;
     width: 60px;
@@ -167,17 +170,17 @@ const subtractionQuestions = [
 
 const display = () => {
     return(
-        <div id="problem">
+        <Wrapper>
             <ProblemWrapper>
-                    <Card>
+                    <FlashCard>
                         <h3 id="num1">{questions[num1].num1}</h3>
-                    </Card>
+                    </FlashCard>
                     <OperatorCard>
                         <p id="operation">{operator}</p>
                     </OperatorCard>
-                    <Card>
+                    <FlashCard>
                         <h3 id="num2">{questions[num2].num2}</h3>
-                    </Card>
+                    </FlashCard>
                     <form>
                         <input type="text" placeholder="Answer" id="answer"></input>
                         <button id="submit" onClick={handleSubmit}>Submit</button>
@@ -188,7 +191,7 @@ const display = () => {
                         <p id="correctAnswer"></p>
                     </Answers>
             </ProblemWrapper>
-        </div>
+        </Wrapper>
     )
 }
 
@@ -285,12 +288,12 @@ const calculateAnswer = () => {
 //the pages MathHome displays buttons 
 const MathHome = () => {
     return(
-        <>
+        <Wrapper>
             <Link to="/math/addition" className="link"><MathLinks>Addition</MathLinks></Link>
             <Link to="/math/subtraction" className="link"><MathLinks>Subtraction</MathLinks></Link>
             <Link to="/math/multiplication" className="link"><MathLinks>Multiplication</MathLinks></Link>
             <Link to="/math/division" className="link"><MathLinks>Division</MathLinks></Link> 
-        </>
+        </Wrapper>
     )
 }
 
@@ -336,7 +339,8 @@ const MathGame = () => {
             <Route exact path={"/math/multiplication"} component={DisplayProblem} />
             <Route exact path={"/math/division"} component={DisplayProblem} />
             <Route exact path={"/math/math/lose"} render={(props) => <LoserWindow {...props} playAgain={handlePlayAgain}/>} />
-            <Route exact path={"/math/win"} render={(props) => <WinnerWindow {...props} score={score}/>} />
+            <Route exact path={"/math/win"} render={(props) => <WinnerWindow {...props} score={score} playAgain={handlePlayAgain}/>} />
+            {/* <Route exact path={"/math/win"} render={(props) => <WinnerWindow {...props} score={score}/>} /> */}
             </Switch>
         </>
     )
