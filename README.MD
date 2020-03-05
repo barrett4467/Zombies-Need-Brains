@@ -4,6 +4,8 @@ Zombies Need Brains was designed to be an educational game for children that wou
 
 ![](ZombiesNeedBrains.gif)
 
+Check it out at https://lit-crag-22298.herokuapp.com/
+
 ##  Technologies
     React
     Styled Components
